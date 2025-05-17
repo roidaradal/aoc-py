@@ -1,6 +1,22 @@
 from collections.abc import Callable
 import time 
 
+dims3  = tuple[int,int,int]
+
+def toDims3(line: str, sep: str|None) -> dims3:
+    a,b,c = [int(x) for x in line.split(sep)]
+    return (a,b,c)
+
+#####################################################################################
+
+def getTotal(items: list, fn: Callable) -> int:
+    total = 0 
+    for item in items:
+        total += fn(item)
+    return total
+
+#####################################################################################
+
 def do(fn: Callable):
     start = time.time()
     fn()
