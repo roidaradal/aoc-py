@@ -4,6 +4,7 @@ from typing import Any
 import time, hashlib
 
 coords = tuple[int,int]
+int2   = tuple[int,int]
 dims2  = tuple[int,int]
 dims3  = tuple[int,int,int]
 delta  = tuple[int,int]
@@ -16,6 +17,11 @@ def toDims2(line: str, sep: str|None) -> dims2:
 def toDims3(line: str, sep: str|None) -> dims3:
     a,b,c = [int(x) for x in line.split(sep)]
     return (a,b,c)
+
+def toInt2(line: str, sep: str|None) -> int2:
+    a,b = [int(x) for x in line.split(sep)]
+    return (a,b)
+
 
 def toStrInt(line: str, strLen: int) -> strInt:
     line = line.strip() 
