@@ -9,6 +9,10 @@ dims3  = tuple[int,int,int]
 delta  = tuple[int,int]
 strInt = tuple[str,int]
 
+def toDims2(line: str, sep: str|None) -> dims2:
+    a,b = [int(x) for x in line.split(sep)]
+    return (a,b)
+
 def toDims3(line: str, sep: str|None) -> dims3:
     a,b,c = [int(x) for x in line.split(sep)]
     return (a,b,c)
@@ -72,6 +76,18 @@ def hasTwins(word: str, gap: int = 0) -> bool:
 def splitStr(word: str, sep: str) -> list[str]:
     return [x.strip() for x in word.split(sep)]
 
+def groupChunks(word: str) -> list[str]:
+    chunks = []
+    curr, count = word[0], 1
+    for i in range(1, len(word)):
+        char = word[i]
+        if char == curr: 
+            count += 1
+        else: 
+            chunks.append(curr * count) # repeat string 
+            curr, count = char, 1 
+    chunks.append(curr * count)
+    return chunks
 
 #####################################################################################
 
