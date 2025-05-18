@@ -88,6 +88,14 @@ def insideBounds(c: coords, maxBounds: dims2, minBounds: dims2 = (0,0)) -> bool:
     numRows, numCols = maxBounds 
     return minRows <= row < numRows and minCols <= col < numCols
 
+def surround8(c: coords) -> list[coords]:
+    row,col = c 
+    return [
+        (row-1,col-1), (row-1,col-0), (row-1,col+1),
+        (row-0,col-1),                (row-0,col+1),
+        (row+1,col-1), (row+1,col-0), (row+1,col+1),
+    ]
+
 #####################################################################################
 
 def do(fn: Callable):
