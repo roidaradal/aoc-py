@@ -1,6 +1,6 @@
-from collections.abc import Callable
+from collections.abc import Callable, Iterator
 from collections import defaultdict
-import time 
+import time, hashlib
 
 coords = tuple[int,int]
 dims3  = tuple[int,int,int]
@@ -17,6 +17,20 @@ def getTotal(items: list, fn: Callable) -> int:
     for item in items:
         total += fn(item)
     return total
+
+#####################################################################################
+
+def md5Hash(word: str) -> str:
+    return hashlib.md5(word.encode('utf-8')).hexdigest()
+
+def md5HashGenerator(key: str, goal: str, start: int) -> Iterator:
+    i = start
+    while True:
+        word = '%s%d' % (key, i)
+        hash = md5Hash(word)
+        if hash.startswith(goal):
+            yield (i, hash)
+        i += 1
 
 #####################################################################################
 
