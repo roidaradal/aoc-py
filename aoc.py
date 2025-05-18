@@ -10,6 +10,7 @@ dims2  = tuple[int,int]
 dims3  = tuple[int,int,int]
 delta  = tuple[int,int]
 strInt = tuple[str,int]
+vector = tuple[coords,delta]
 
 def toDims2(line: str, sep: str|None) -> dims2:
     a,b = [int(x) for x in line.split(sep)]
@@ -121,6 +122,10 @@ def getBounds(grid: list) -> dims2:
 def move(c: coords, d: delta) -> coords:
     (row,col),(dy,dx) = c, d
     return (row+dy, col+dx)
+
+def getDelta(c1: coords, c2: coords) -> delta:
+    (y1,x1), (y2,x2) = c1, c2 
+    return (y2-y1, x2-x1)
 
 def manhattan(c: coords) -> int:
     return sum(abs(x) for x in c)
