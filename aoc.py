@@ -5,6 +5,7 @@ import time, hashlib
 
 coords = tuple[int,int]
 int2   = tuple[int,int]
+int3   = tuple[int,int,int]
 dims2  = tuple[int,int]
 dims3  = tuple[int,int,int]
 delta  = tuple[int,int]
@@ -107,6 +108,9 @@ rightOf: dict[delta,delta] = {U: R, R: D, D: L, L: U}
 
 def createGrid(initial: Any, numRows: int, numCols: int) -> list[list]:
     return [[initial for _ in range(numCols)] for _ in range(numRows)]
+
+def getBounds(grid: list) -> dims2:
+    return (len(grid), len(grid[0]))
 
 def move(c: coords, d: delta) -> coords:
     (row,col),(dy,dx) = c, d
