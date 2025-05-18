@@ -16,6 +16,9 @@ def toStrInt(line: str, strLen: int) -> strInt:
     line = line.strip() 
     return (line[:strLen], int(line[strLen:]))
 
+def toIntList(line: str, sep: str|None) -> list[int]:
+    return [int(x) for x in line.split(sep)]
+
 #####################################################################################
 
 def getTotal(items: list, fn: Callable) -> int:
