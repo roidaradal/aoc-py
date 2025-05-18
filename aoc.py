@@ -1,5 +1,6 @@
 from collections.abc import Callable, Iterator
 from collections import defaultdict
+from typing import Any
 import time, hashlib
 
 coords = tuple[int,int]
@@ -68,6 +69,10 @@ def hasTwins(word: str, gap: int = 0) -> bool:
             return True 
     return False
 
+def splitStr(word: str, sep: str) -> list[str]:
+    return [x.strip() for x in word.split(sep)]
+
+
 #####################################################################################
 
 U: delta = (-1,0)
@@ -77,6 +82,9 @@ R: delta = (0,1)
 
 leftOf:  dict[delta,delta] = {U: L, L: D, D: R, R: U}
 rightOf: dict[delta,delta] = {U: R, R: D, D: L, L: U}
+
+def createGrid(initial: Any, numRows: int, numCols: int) -> list[list]:
+    return [[initial for _ in range(numCols)] for _ in range(numRows)]
 
 def move(c: coords, d: delta) -> coords:
     (row,col),(dy,dx) = c, d
