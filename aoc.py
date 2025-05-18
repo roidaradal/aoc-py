@@ -18,6 +18,13 @@ def getTotal(items: list, fn: Callable) -> int:
         total += fn(item)
     return total
 
+def countValid(items: list, fn: Callable) -> int:
+    count = 0 
+    for item in items:
+        if fn(item):
+            count += 1 
+    return count
+
 #####################################################################################
 
 def md5Hash(word: str) -> str:
@@ -31,6 +38,30 @@ def md5HashGenerator(key: str, goal: str, start: int) -> Iterator:
         if hash.startswith(goal):
             yield (i, hash)
         i += 1
+
+#####################################################################################
+
+def charFreq(word: str, skip: list|None = None) -> defaultdict[str,int]:
+    freq: defaultdict[str,int] = defaultdict(int)
+    for char in word:
+        if skip != None and char in skip:
+            continue
+        freq[char] += 1
+    return freq
+
+def hasTwins(word: str, gap: int = 0) -> bool:
+    back = gap+1
+    for i in range(back, len(word)):
+        if word[i] == word[i-back]:
+            return True 
+    return False
+
+def substringPositions(word: str, length: int) -> defaultdict[str,list[int]]:
+    at = defaultdict(list)
+    for i in range(len(word)-(length-1)):
+        sub = word[i:i+length]
+        at[sub].append(i)
+    return at
 
 #####################################################################################
 
