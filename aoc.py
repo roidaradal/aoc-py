@@ -5,10 +5,15 @@ import time, hashlib
 coords = tuple[int,int]
 dims3  = tuple[int,int,int]
 delta  = tuple[int,int]
+strInt = tuple[str,int]
 
 def toDims3(line: str, sep: str|None) -> dims3:
     a,b,c = [int(x) for x in line.split(sep)]
     return (a,b,c)
+
+def toStrInt(line: str, strLen: int) -> strInt:
+    line = line.strip() 
+    return (line[:strLen], int(line[strLen:]))
 
 #####################################################################################
 
@@ -56,13 +61,6 @@ def hasTwins(word: str, gap: int = 0) -> bool:
             return True 
     return False
 
-def substringPositions(word: str, length: int) -> defaultdict[str,list[int]]:
-    at = defaultdict(list)
-    for i in range(len(word)-(length-1)):
-        sub = word[i:i+length]
-        at[sub].append(i)
-    return at
-
 #####################################################################################
 
 U: delta = (-1,0)
@@ -70,19 +68,15 @@ D: delta = (1,0)
 L: delta = (0,-1)
 R: delta = (0,1)
 
+leftOf:  dict[delta,delta] = {U: L, L: D, D: R, R: U}
+rightOf: dict[delta,delta] = {U: R, R: D, D: L, L: U}
+
 def move(c: coords, d: delta) -> coords:
     (row,col),(dy,dx) = c, d
     return (row+dy, col+dx)
 
-# Returns ending position and set of visited coords (with frequency of visit)
-def walk(moves: list[delta], start: coords = (0,0),  visitStart: bool = True) -> tuple[coords,dict[coords,int]]:
-    visited = defaultdict(int)
-    if visitStart: visited[start] = 1 
-    curr = start
-    for d in moves:
-        curr = move(curr, d)
-        visited[curr] += 1 
-    return (curr, visited)
+def manhattan(c: coords) -> int:
+    return sum(abs(x) for x in c)
 
 #####################################################################################
 

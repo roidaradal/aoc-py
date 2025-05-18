@@ -16,17 +16,24 @@ def data(full: bool) -> list[delta]:
 
 def part1():
     moves = data(full=True)
-    _, visited = walk(moves)
+    visited = walk(moves)
     print(len(visited))
 
 def part2():
     moves = data(full=True)
     m = len(moves)
-    _, visited1 = walk(moves[0:m-1:2])  # Santa = Even
-    _, visited2 = walk(moves[1:m:2])    # Robo  = Odd
-    v1 = set(visited1.keys())
-    v2 = set(visited2.keys())
+    v1 = walk(moves[0:m-1:2])  # Santa = Even
+    v2 = walk(moves[1:m:2])    # Robo  = Odd
     print(len(v1.union(v2)))
+
+def walk(moves: list[delta], start: coords = (0,0),  visitStart: bool = True) -> set[coords]:
+    visited = set()
+    if visitStart: visited.add(start)
+    curr = start
+    for d in moves:
+        curr = move(curr, d)
+        visited.add(curr) 
+    return visited
 
 if __name__ == '__main__':
     do(part1)

@@ -40,13 +40,20 @@ def isNice2(word: str) -> bool:
     
     # Check if has pair of two letters that appears >= 2 with no overlap
     pairs = substringPositions(word, 2)
-    for pair,idxs in pairs.items():
+    for idxs in pairs.values():
         if len(idxs) >= 3:
             return True 
         elif len(idxs) ==2 and abs(idxs[0]-idxs[1]) >= 2:
             # if only two indexes, make sure has gap of at least 2
             return True    
     return False
+
+def substringPositions(word: str, length: int) -> defaultdict[str,list[int]]:
+    at = defaultdict(list)
+    for i in range(len(word)-(length-1)):
+        sub = word[i:i+length]
+        at[sub].append(i)
+    return at
 
 if __name__ == '__main__':
     do(part1)
