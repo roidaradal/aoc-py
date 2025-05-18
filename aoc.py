@@ -73,6 +73,12 @@ def charFreq(word: str, skip: list|None = None) -> defaultdict[str,int]:
         freq[char] += 1
     return freq
 
+def countFreq(items: list) -> dict:
+    freq = defaultdict(int)
+    for item in items:
+        freq[item] += 1
+    return freq
+
 def hasTwins(word: str, gap: int = 0) -> bool:
     back = gap+1
     for i in range(back, len(word)):
