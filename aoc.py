@@ -79,7 +79,7 @@ def hasTwins(word: str, gap: int = 0) -> bool:
             return True 
     return False
 
-def splitStr(word: str, sep: str) -> list[str]:
+def splitStr(word: str, sep: str|None) -> list[str]:
     return [x.strip() for x in word.split(sep)]
 
 def groupChunks(word: str) -> list[str]:
