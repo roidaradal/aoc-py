@@ -50,6 +50,9 @@ def md5HashGenerator(key: str, goal: str, start: int) -> Iterator:
 
 #####################################################################################
 
+def sortedStr(word: str) -> str: 
+    return ''.join(sorted(word))
+
 def charFreq(word: str, skip: list|None = None) -> defaultdict[str,int]:
     freq: defaultdict[str,int] = defaultdict(int)
     for char in word:
