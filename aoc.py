@@ -3,6 +3,7 @@ from collections import defaultdict
 import time, hashlib
 
 coords = tuple[int,int]
+dims2  = tuple[int,int]
 dims3  = tuple[int,int,int]
 delta  = tuple[int,int]
 strInt = tuple[str,int]
@@ -77,6 +78,12 @@ def move(c: coords, d: delta) -> coords:
 
 def manhattan(c: coords) -> int:
     return sum(abs(x) for x in c)
+
+def insideBounds(c: coords, maxBounds: dims2, minBounds: dims2 = (0,0)) -> bool:
+    row, col = c 
+    minRows, minCols = minBounds
+    numRows, numCols = maxBounds 
+    return minRows <= row < numRows and minCols <= col < numCols
 
 #####################################################################################
 
