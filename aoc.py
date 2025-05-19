@@ -103,6 +103,9 @@ def groupChunks(word: str) -> list[str]:
     chunks.append(curr * count)
     return chunks
 
+def tryParseInt(x: str) -> int|str:
+    return int(x) if x.isdigit() else x
+
 #####################################################################################
 
 U: delta = (-1,0)
