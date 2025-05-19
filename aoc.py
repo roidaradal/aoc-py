@@ -149,6 +149,15 @@ def surround8(c: coords) -> list[coords]:
 
 #####################################################################################
 
+edgeMap = dict[tuple[str,str], int]
+
+class Graph:
+    def __init__(self):
+        self.vertices = set()
+        self.edges = {}
+        
+#####################################################################################
+
 def do(fn: Callable):
     start = time.time()
     fn()
