@@ -47,6 +47,10 @@ def countValid(items: list, fn: Callable) -> int:
             count += 1 
     return count
 
+def argmax(items: list[int]) -> int:
+    # -index for tie-breaker: choose earlier index first 
+    return max((x,-i) for i,x in enumerate(items))[1] * -1
+
 #####################################################################################
 
 def md5Hash(word: str) -> str:
@@ -155,7 +159,7 @@ class Graph:
     def __init__(self):
         self.vertices = set()
         self.edges = {}
-        
+
 #####################################################################################
 
 def do(fn: Callable):
