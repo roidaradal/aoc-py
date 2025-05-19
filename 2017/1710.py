@@ -1,0 +1,82 @@
+# Advent of Code 2017 Day 10
+# John Roy Daradal 
+
+from aoc import *
+from functools import reduce
+from operator import xor
+
+limit = 256
+
+def data(full: bool) -> str:
+    return readLines(17, 10, full)[0]
+
+def part1():
+    line = data(full=True)
+    lengths = toIntList(line, ',')
+    numbers = knotHash(lengths, 1)
+    a, b = numbers[0], numbers[1]
+    print(a * b) 
+
+def part2():
+    line = data(full=True)
+    lengths = [ord(x) for x in line] + [17, 31, 73, 47, 23]
+    numbers = knotHash(lengths, 64)
+    result = []
+    for i in range(0, limit, 16):
+        r = reduce(xor, numbers[i:i+16])
+        result.append(hexCode(r))
+    print(''.join(result)) 
+
+def knotHash(lengths: list[int], rounds: int) -> list[int]:
+    numbers = list(range(limit))
+    i, skip = 0, 0
+    for _ in range(rounds):
+        for length in lengths:
+            if length > limit: continue
+
+            j = i+length
+            if j <= limit:
+                numbers[i:j] = numbers[i:j][::-1] # reverse
+            else: # wraparound
+                s = limit-i
+                j = length-s
+                chunk = (numbers[i:] + numbers[:j])[::-1]
+                numbers[i:] = chunk[:s]
+                numbers[:j] = chunk[s:]
+            
+            i = (i+length+skip) % limit 
+            skip += 1
+    return numbers
+
+def hexCode(x: int) -> str:
+    return '%0.2x' % x
+
+if __name__ == '__main__':
+    do(part1)
+    do(part2)
+
+'''
+Part1:
+- Compute KnotHash for 1 round using the lengths in the input
+- Output the product of the first two numbers in the result
+
+Part2:
+- The lengths can be computed by treating each character in the input as an ASCII code 
+- Add the other lengths specified
+- Compute KnotHash for 64 rounds
+- Take the resulting list of 256 numbers and process by chunks of size 16
+- For each chunk, compute the xor of the 16 numbers (use reduce) and append its 2-digit hexcode to result
+- Print out the 32-character result
+
+KnotHash:
+- Start with list of numbers from 0 to 255
+- Start at index = 0, skip = 0
+- Repeat process based on number of rounds specified; do not reset index, skip in between rounds
+- Go through each length from the input; if length > 256, skip it
+- Compute the span by adding the length to current index (i + length)
+- If span is within normal bounds, reverse that span
+- If need to wrap-around, combine the tail span and the head span and reverse it
+- Put the reversed span back to the tail span and head span's positions
+- Move the index by increasing it with the length and current skip; wrap-around if necessary
+- Increase the skip after processing one length
+'''
