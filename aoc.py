@@ -13,15 +13,15 @@ strInt = tuple[str,int]
 vector = tuple[coords,delta]
 
 def toDims2(line: str, sep: str|None) -> dims2:
-    a,b = [int(x) for x in line.split(sep)]
+    a,b = [int(x.strip()) for x in line.split(sep)]
     return (a,b)
 
 def toDims3(line: str, sep: str|None) -> dims3:
-    a,b,c = [int(x) for x in line.split(sep)]
+    a,b,c = [int(x.strip()) for x in line.split(sep)]
     return (a,b,c)
 
 def toInt2(line: str, sep: str|None) -> int2:
-    a,b = [int(x) for x in line.split(sep)]
+    a,b = [int(x.strip()) for x in line.split(sep)]
     return (a,b)
 
 
@@ -30,7 +30,7 @@ def toStrInt(line: str, strLen: int) -> strInt:
     return (line[:strLen], int(line[strLen:]))
 
 def toIntList(line: str, sep: str|None) -> list[int]:
-    return [int(x) for x in line.split(sep)]
+    return [int(x.strip()) for x in line.split(sep)]
 
 #####################################################################################
 
@@ -134,8 +134,9 @@ def getDelta(c1: coords, c2: coords) -> delta:
     (y1,x1), (y2,x2) = c1, c2 
     return (y2-y1, x2-x1)
 
-def manhattan(c: coords) -> int:
-    return sum(abs(x) for x in c)
+def manhattan(c1: coords, c2: coords=(0,0)) -> int:
+    (y1,x1),(y2,x2) = c1, c2
+    return abs(y2-y1) + abs(x2-x1)
 
 def insideBounds(c: coords, maxBounds: dims2, minBounds: dims2 = (0,0)) -> bool:
     row, col = c 
