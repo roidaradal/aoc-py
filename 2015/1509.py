@@ -4,6 +4,13 @@
 import itertools
 from aoc import *
 
+edgeMap = dict[tuple[str,str], int]
+
+class Graph:
+    def __init__(self):
+        self.vertices = set()
+        self.edges = {}
+
 def data(full: bool) -> Graph:
     g = Graph()
     for line in readLines(15, 9, full):
