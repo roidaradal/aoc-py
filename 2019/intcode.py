@@ -13,3 +13,16 @@ def modes(cmd: str, count: int) -> list[int]:
 
 def param(x: int, mode: int, numbers: list[int]) -> int:
     return numbers[x] if mode == 0 else x
+
+def param2(x: int, mode: int, rbase: int, numbers: dict[int,int]) -> int:
+    if mode in (0,2):
+        idx = index(x, mode, rbase)
+        return numbers[idx]
+    elif mode == 1:
+        return x 
+    return 0
+
+def index(x: int, mode: int, rbase: int) -> int:
+    idx = x 
+    if mode == 2: idx += rbase 
+    return idx
