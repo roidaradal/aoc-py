@@ -2,6 +2,7 @@
 # John Roy Daradal 
 
 from aoc import *
+from intcode import *
 
 def data(full: bool) -> list[int]:
     line = readLines(19, 5, full)[0]
@@ -55,19 +56,6 @@ def runProgram(numbers: list[int], start: int):
                 i = param(p2, m2, numbers)
             else:
                 i += 3
-
-def modes(cmd: str, count: int) -> list[int]: 
-    m = [0] * count
-    if len(cmd) == 0: return m
-
-    i = 0
-    for x in reversed(cmd):
-        m[i] = int(x)
-        i += 1
-    return m
-
-def param(x: int, mode: int, numbers: list[int]) -> int:
-    return numbers[x] if mode == 0 else x
 
 if __name__ == '__main__':
     do(part1)
