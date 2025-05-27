@@ -11,6 +11,7 @@ dims3  = tuple[int,int,int]
 delta  = tuple[int,int]
 strInt = tuple[str,int]
 vector = tuple[coords,delta]
+IntGrid = list[list[int]]
 
 def toDims2(line: str, sep: str|None) -> dims2:
     a,b = [int(x.strip()) for x in line.split(sep)]
@@ -30,6 +31,9 @@ def toStrInt(line: str, strLen: int) -> strInt:
 
 def toIntList(line: str, sep: str|None) -> list[int]:
     return [int(x.strip()) for x in line.split(sep)]
+
+def toIntLine(line: str) -> list[int]:
+    return [int(x) for x in line]
 
 #####################################################################################
 

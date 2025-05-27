@@ -3,12 +3,8 @@
 
 from aoc import *
 
-Grid = list[list[int]]
-
-def data(full: bool) -> Grid:
-    def fn(line: str) -> list[int]:
-        return [int(x) for x in line]
-    return [fn(line) for line in readLines(21, 9, full)]
+def data(full: bool) -> IntGrid:
+    return [toIntLine(line) for line in readLines(21, 9, full)]
 
 def solve():
     grid = data(full=True)
@@ -25,7 +21,7 @@ def solve():
     print(b1*b2*b3)
 
 
-def findLowPoints(grid: Grid) -> list[int3]:
+def findLowPoints(grid: IntGrid) -> list[int3]:
     low: list[int3] = []
     for row, line in enumerate(grid):
         for col, height in enumerate(line):
@@ -34,7 +30,7 @@ def findLowPoints(grid: Grid) -> list[int3]:
                 low.append((row,col,height))
     return low
 
-def surrounding(grid: Grid, center: coords) -> list[int3]:
+def surrounding(grid: IntGrid, center: coords) -> list[int3]:
     bounds = getBounds(grid)
     near = []
     for y,x in surround4(center):
@@ -42,7 +38,7 @@ def surrounding(grid: Grid, center: coords) -> list[int3]:
         near.append((y,x,grid[y][x]))
     return near
 
-def basinSize(grid: Grid, center: coords) -> int:
+def basinSize(grid: IntGrid, center: coords) -> int:
     visited = set()
     stack = [center]
     while len(stack) > 0:

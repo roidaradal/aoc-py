@@ -5,7 +5,7 @@ import itertools
 from aoc import *
 
 def data(full: bool) -> list[int]:
-    return [int(x) for x in readLines(20, 9, full)]
+    return [int(line) for line in readLines(20, 9, full)]
 
 def solve():
     numbers = data(full=True)

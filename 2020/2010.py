@@ -4,7 +4,7 @@
 from aoc import *
 
 def data(full: bool) -> list[int]:
-    numbers = [int(x) for x in readLines(20, 10, full)]
+    numbers = [int(line) for line in readLines(20, 10, full)]
     numbers.append(0)
     numbers.append(max(numbers) + 3)
     return numbers 
