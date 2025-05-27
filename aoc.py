@@ -24,7 +24,6 @@ def toInt2(line: str, sep: str|None) -> int2:
     a,b = [int(x.strip()) for x in line.split(sep)]
     return (a,b)
 
-
 def toStrInt(line: str, strLen: int) -> strInt:
     line = line.strip() 
     return (line[:strLen], int(line[strLen:]))
@@ -152,6 +151,13 @@ def surround8(c: coords) -> list[coords]:
         (row+1,col-1), (row+1,col-0), (row+1,col+1),
     ]
 
+def surround4(c: coords) -> list[coords]:
+    row,col = c
+    return [
+                       (row-1,col-0), 
+        (row-0,col-1),                (row-0,col+1),
+                       (row+1,col-0),
+    ]
 #####################################################################################
 
 def do(fn: Callable):
