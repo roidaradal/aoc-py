@@ -29,6 +29,10 @@ def toStrInt(line: str, strLen: int) -> strInt:
     line = line.strip() 
     return (line[:strLen], int(line[strLen:]))
 
+def lineStrInt(line: str, sep: str|None) -> strInt:
+    a,b = [x.strip() for x in line.split(sep)]
+    return (a, int(b))
+
 def toIntList(line: str, sep: str|None) -> list[int]:
     return [int(x.strip()) for x in line.split(sep)]
 
