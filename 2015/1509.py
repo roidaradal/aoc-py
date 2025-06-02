@@ -3,13 +3,7 @@
 
 import itertools
 from aoc import *
-
-edgeMap = dict[tuple[str,str], int]
-
-class Graph:
-    def __init__(self):
-        self.vertices = set()
-        self.edges = {}
+from graph import *
 
 def data(full: bool) -> Graph:
     g = Graph()
@@ -34,7 +28,7 @@ def solve():
     print(minDistance) 
     print(maxDistance)
 
-def computeDistance(path: tuple, edges: edgeMap) -> int:
+def computeDistance(path: tuple, edges: EdgeMap) -> int:
     indexes = list(range(1, len(path)))
     fn = lambda i: edges[(path[i-1], path[i])]
     return getTotal(indexes, fn)

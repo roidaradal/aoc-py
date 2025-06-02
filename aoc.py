@@ -10,6 +10,7 @@ dims2  = tuple[int,int]
 dims3  = tuple[int,int,int]
 delta  = tuple[int,int]
 strInt = tuple[str,int]
+str2   = tuple[str,str]
 vector = tuple[coords,delta]
 IntGrid = list[list[int]]
 
