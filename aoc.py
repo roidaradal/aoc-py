@@ -116,7 +116,11 @@ def groupChunks(word: str) -> list[str]:
     return chunks
 
 def tryParseInt(x: str) -> int|str:
-    return int(x) if x.isdigit() else x
+    try: 
+        y = int(x)
+        return y
+    except ValueError:
+        return x
 
 #####################################################################################
 
