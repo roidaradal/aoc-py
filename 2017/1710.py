@@ -2,10 +2,9 @@
 # John Roy Daradal 
 
 from aoc import *
+from knotHash import *
 from functools import reduce
 from operator import xor
-
-limit = 256
 
 def data(full: bool) -> str:
     return readLines(17, 10, full)[0]
@@ -19,37 +18,13 @@ def part1():
 
 def part2():
     line = data(full=True)
-    lengths = [ord(x) for x in line] + [17, 31, 73, 47, 23]
+    lengths = [ord(x) for x in line]
     numbers = knotHash(lengths, 64)
     result = []
-    for i in range(0, limit, 16):
+    for i in range(0, knotHashLimit, 16):
         r = reduce(xor, numbers[i:i+16])
         result.append(hexCode(r))
     print(''.join(result)) 
-
-def knotHash(lengths: list[int], rounds: int) -> list[int]:
-    numbers = list(range(limit))
-    i, skip = 0, 0
-    for _ in range(rounds):
-        for length in lengths:
-            if length > limit: continue
-
-            j = i+length
-            if j <= limit:
-                numbers[i:j] = numbers[i:j][::-1] # reverse
-            else: # wraparound
-                s = limit-i
-                j = length-s
-                chunk = (numbers[i:] + numbers[:j])[::-1]
-                numbers[i:] = chunk[:s]
-                numbers[:j] = chunk[s:]
-            
-            i = (i+length+skip) % limit 
-            skip += 1
-    return numbers
-
-def hexCode(x: int) -> str:
-    return '%0.2x' % x
 
 if __name__ == '__main__':
     do(part1)

@@ -73,6 +73,9 @@ def md5HashGenerator(key: str, goal: str, start: int) -> Iterator:
             yield (i, hash)
         i += 1
 
+def binaryFilled(x: int, fill: int) -> str:
+    return bin(x)[2:].zfill(fill)
+
 #####################################################################################
 
 def sortedStr(word: str) -> str: 
