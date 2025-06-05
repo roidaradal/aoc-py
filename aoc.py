@@ -6,6 +6,7 @@ import time, hashlib
 coords = tuple[int,int]
 int2   = tuple[int,int]
 int3   = tuple[int,int,int]
+int4   = tuple[int,int,int,int]
 dims2  = tuple[int,int]
 dims3  = tuple[int,int,int]
 delta  = tuple[int,int]
