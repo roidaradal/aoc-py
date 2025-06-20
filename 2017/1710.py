@@ -7,16 +7,18 @@ from functools import reduce
 from operator import xor
 
 def data(full: bool) -> str:
-    return readLines(17, 10, full)[0]
+    return readFirstLine(17, 10, full)
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     line = data(full=True)
     lengths = toIntList(line, ',')
     numbers = knotHash(lengths, 1)
-    a, b = numbers[0], numbers[1]
-    print(a * b) 
+    return numbers[0] * numbers[1]
 
-def part2():
+def part2() -> str:
     line = data(full=True)
     lengths = [ord(x) for x in line]
     numbers = knotHash(lengths, 64)
@@ -24,11 +26,10 @@ def part2():
     for i in range(0, knotHashLimit, 16):
         r = reduce(xor, numbers[i:i+16])
         result.append(hexCode(r))
-    print(''.join(result)) 
+    return ''.join(result)
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 17, 10)
 
 '''
 Part1:

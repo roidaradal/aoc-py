@@ -4,15 +4,16 @@
 from aoc import *
 
 def data(full: bool) -> str:
-    return readLines(18, 5, full)[0]
+    return readFirstLine(18, 5, full)
 
-def part1():
+def solve() -> Solution:
     word = data(full=True)
+
+    # Part 1
     word = fullyCompress(word)
-    print(len(word)) 
+    length = len(word)
 
-def part2():
-    word = data(full=True)
+    # Part 2
     chars = set(char.lower() for char in word) 
     numChars = len(chars)
     minLength = float('inf')
@@ -22,7 +23,8 @@ def part2():
         wordLen = len(word2)
         print('%.2d / %.2d - %s - %d' % (i+1, numChars, char, wordLen))
         minLength = min(minLength, wordLen)
-    print(minLength)
+
+    return newSolution(length, minLength)
 
 def fullyCompress(word: str) -> str:
     ok = True 
@@ -39,8 +41,7 @@ def compress(word: str) -> tuple[str,bool]:
     return (word, False)
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 18, 5)
 
 '''
 Part1:

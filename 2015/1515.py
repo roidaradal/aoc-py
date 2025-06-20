@@ -13,16 +13,16 @@ def data(full: bool) -> dict[str,attr]:
         m[key] = (a,b,c,d,e)
     return m
 
-def solve():
+def solve() -> Solution:
     m = data(full=True)
 
     # Part 1
-    maxScore = findBestScore(m, 0)
-    print(maxScore)
+    maxScore1 = findBestScore(m, 0)
 
     # Part 2 
-    maxScore = findBestScore(m, 500)
-    print(maxScore)
+    maxScore2 = findBestScore(m, 500)
+
+    return newSolution(maxScore1, maxScore2)
 
 def findBestScore(m: dict[str,attr], goal: int) -> int:
     i1, i2, i3, i4 = sorted(m.keys())
@@ -54,7 +54,7 @@ def calories(combo: dict[str,int], m: dict[str,attr]) -> int:
     return total
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 15, 15)
 
 '''
 Part1:

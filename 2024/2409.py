@@ -4,10 +4,13 @@
 from aoc import *
 
 def data(full: bool) -> list[int]:
-    line = readLines(24, 9, full)[0]
+    line = readFirstLine(24, 9, full)
     return toIntLine(line)
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     numbers = data(full=True)
     head, tail = buildLinkedList(numbers)
     a, b = head, tail 
@@ -33,10 +36,9 @@ def part1():
             a.next.prev = node 
             a.next = node
 
-    checksum = getChecksum(head)
-    print(checksum)
-
-def part2():
+    return getChecksum(head)
+     
+def part2() -> int:
     numbers = data(full=True)
     head,tail = buildLinkedList(numbers)
     curr = tail 
@@ -75,8 +77,7 @@ def part2():
         else:
             break # dont look for 0 anymore, no left free space anyway
 
-    checksum = getChecksum(head)
-    print(checksum) 
+    return getChecksum(head)
 
 class Node:
     def __init__(self, value: int|None, size: int, rank: int):
@@ -135,8 +136,7 @@ def getChecksum(head: Node) -> int:
     return checksum
     
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 24, 9)
 
 '''
 Part1:

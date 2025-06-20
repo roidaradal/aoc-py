@@ -12,24 +12,25 @@ def data(full: bool) -> list[strInt]:
         return lineStrInt(line, None)
     return [fn(line) for line in readLines(23, 7, full)]
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     hands = data(full=True)
     computePower()
 
     hands = sorted(hands, key=cmp_to_key(compareHands))
     items = list(enumerate(hands))
-    total = getTotal(items, score)
-    print(total)
+    return getTotal(items, score)
 
-def part2():
+def part2() -> int:
     hands = data(full=True)
     computePower()
     power['J'] = 1 # Joker
 
     hands = sorted(hands, key=cmp_to_key(compareHands2))
     items = list(enumerate(hands))
-    total = getTotal(items, score)
-    print(total)
+    return getTotal(items, score)
 
 def computePower():
     value = 14 
@@ -108,8 +109,7 @@ def categoryScore(category: tuple) -> int:
         return 0
     
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 23, 7)
 
 '''
 Part1:

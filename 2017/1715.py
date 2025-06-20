@@ -9,17 +9,18 @@ def data(full: bool) -> int2:
     b = int(line2.split()[-1])
     return a, b
 
-def part1():
+def solve():
     prevAB = data(full=True)
-    count = solve(prevAB, (0, 0), 40_000_000)
-    print(count)
+    
+    # Part 1
+    count1 = countMatches(prevAB, (0, 0), 40_000_000)
 
-def part2():
-    prevAB = data(full=True)
-    count = solve(prevAB, (4, 8), 5_000_000)
-    print(count)
+    # Part 2 
+    count2 = countMatches(prevAB, (4, 8), 5_000_000)
 
-def solve(prevAB: int2, multAB: int2, numSteps: int) -> int:
+    return newSolution(count1, count2)
+
+def countMatches(prevAB: int2, multAB: int2, numSteps: int) -> int:
     prevA, prevB = prevAB 
     multA, multB = multAB
     factorA, factorB = 16807, 48271 
@@ -49,8 +50,7 @@ def isMatch(a: int, b: int) -> bool:
     return x[-16:] == y[-16:]
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 17, 15)
 
 '''
 Solve:

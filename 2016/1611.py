@@ -35,11 +35,12 @@ def data(add: dict[int,list[strInt]], full: bool) -> Problem:
     problem.goal = (0,0,0,numItems)
     return problem
 
-def solve():
+def solve() -> Solution:
     additional: list[dict[int,list[strInt]]] = [
-        {},
-        {0: [('E',1),('E',-1),('D',1),('D',-1)]},
+        {},                                         # Part 1
+        {0: [('E',1),('E',-1),('D',1),('D',-1)]},   # Part 2
     ]
+    numSteps = []
     for add in additional:
         problem = data(add, full=True)
         State.problem = problem
@@ -58,7 +59,7 @@ def solve():
             if i % factor == 0: print(i//factor, score, hscore)
 
             if curr.isDone():
-                print(curr.steps)
+                numSteps.append(curr.steps)
                 break
 
             if curr.key in visited: continue 
@@ -67,6 +68,8 @@ def solve():
                 if nxt.key in visited: continue 
                 score = nxt.score()
                 heapq.heappush(pq, (score, score-nxt.steps, nxt))
+        
+    return newSolution(numSteps[0], numSteps[1]) 
 
 # For ordering state in the heapq
 @dataclass(order=True)
@@ -166,7 +169,7 @@ def heuristicScore(state: State) -> int:
     return score
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 16, 11)
 
 '''
 Data: 

@@ -4,17 +4,18 @@
 from aoc import *
 
 def data(full: bool) -> str:
-    return readLines(22, 6, full)[0]
+    return readFirstLine(22, 6, full)
 
-def part1():
+def solve() -> Solution:
     line = data(full=True)
-    marker = findMarker(line, 4)
-    print(marker) 
 
-def part2():
-    line = data(full=True)
-    marker = findMarker(line, 14)
-    print(marker) 
+    # Part 1
+    marker1 = findMarker(line, 4)
+
+    # Part 2 
+    marker2 = findMarker(line, 14)
+
+    return newSolution(marker1, marker2)
 
 def findMarker(line: str, length: int) -> int:
     for n in range(length, len(line)+1):
@@ -26,8 +27,7 @@ def allUnique(text: str) -> bool:
     return len(text) == len(set(text))
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 22, 6)
 
 '''
 FindMarker:

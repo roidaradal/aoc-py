@@ -26,7 +26,7 @@ def data(full: bool) -> Problem:
             problem.commands.append(('row', (row,rot)))
     return problem
 
-def solve():
+def solve() -> Solution:
     problem = data(full=True)
     grid = problem.grid 
     for action,c in problem.commands:
@@ -36,9 +36,11 @@ def solve():
             rotateRow(grid, c)
         elif action == 'col':
             rotateCol(grid, c)
+    # Part 1
     count = sum(sum(line) for line in grid)
-    print(count) 
+    # Part 2
     displayGrid(grid)
+    return newSolution(count, "")
 
 
 def turnOn(grid: list[list[bool]], c: dims2):
@@ -68,7 +70,7 @@ def displayGrid(grid: list[list[bool]]):
         print(out)
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 16, 8)
 
 '''
 Solve:

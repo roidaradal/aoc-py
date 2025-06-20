@@ -4,14 +4,18 @@
 from aoc import *
 
 def data(full: bool) -> str:
-    return readLines(16, 9, full)[0]
+    return readFirstLine(16, 9, full)
 
-def solve():
+def solve() -> Solution:
     word = data(full=True)
+    
+    # Part 1
     size1 = decompressLength(word, True)
-    print(size1) 
+    
+    # Part 2
     size2 = decompressLength(word, False)
-    print(size2)
+    
+    return newSolution(size1, size2)
 
 def decompressLength(word: str, skip: bool) -> int:
     i, wordLen = 0, len(word)
@@ -36,7 +40,7 @@ def decompressLength(word: str, skip: bool) -> int:
         
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 16, 9)
 
 '''
 Solve:

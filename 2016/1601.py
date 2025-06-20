@@ -4,18 +4,21 @@
 from aoc import * 
 
 def data(full: bool) -> list[strInt]:
-    line = readLines(16, 1, full)[0]
+    line = readFirstLine(16, 1, full)
     return [toStrInt(x, 1) for x in line.split(',')]
 
-def part1():
+def solve() -> Solution:
     moves = data(full=True)
-    hq = findHQ(moves, False)
-    print(manhattan(hq))
 
-def part2():
-    moves = data(full=True)
+    # Part 1
+    hq = findHQ(moves, False)
+    dist1 = manhattan(hq)
+
+    # Part 2 
     hq = findHQ(moves, True)
-    print(manhattan(hq))
+    dist2 = manhattan(hq)
+
+    return newSolution(dist1, dist2)
 
 def findHQ(moves: list[strInt], atVisitedTwice: bool) -> coords:
     curr = (0, 0)
@@ -37,8 +40,7 @@ def findHQ(moves: list[strInt], atVisitedTwice: bool) -> coords:
 
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 16, 1)
 
 '''
 Part1:

@@ -19,16 +19,16 @@ def data(full: bool) -> list[Passport]:
     passports.append(p)
     return passports
 
-def part1():
+def solve() -> Solution:
     passports = data(full=True)
-    count = countValid(passports, hasAllKeys)
-    print(count) 
 
-def part2():
-    passports = data(full=True)
-    count = countValid(passports, isValid)
-    print(count) 
+    # Part 1
+    count1 = countValid(passports, hasAllKeys)
 
+    # Part 2 
+    count2 = countValid(passports, isValid)
+
+    return newSolution(count1, count2)
 
 required = ('byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid')
 def hasAllKeys(p: Passport) -> bool:
@@ -59,8 +59,7 @@ def isValid(p: Passport) -> bool:
     return ok == len(required)
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 20, 4)
 
 '''
 Part1:

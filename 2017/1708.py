@@ -31,19 +31,21 @@ class Instruction:
 def data(full: bool) -> list[Instruction]:
     return [Instruction(line) for line in readLines(17, 8, full)]
 
-def solve():
+def solve() -> Solution:
     instructions = data(full=True)
     reg = defaultdict(int)
     maxVal = 0
     for cmd in instructions:
         if cmd.isSatisfied(reg[cmd.condReg]):
             reg[cmd.targetReg] += cmd.inc
+            # Part 2
             maxVal = max(maxVal, reg[cmd.targetReg])
-    print(max(reg.values()))
-    print(maxVal)
+    # Part 1 
+    maxReg = max(reg.values())
+    return newSolution(maxReg, maxVal)
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 17, 8)
 
 '''
 Solve:

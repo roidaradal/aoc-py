@@ -4,15 +4,19 @@
 from aoc import *
 
 def data(full: bool) -> int:
-    line = readLines(16, 13, full)[0]
+    line = readFirstLine(16, 13, full)
     return int(line)
 
-def solve():
+def solve() -> Solution:
     number = data(full=True)
+
+    # Part 1
     steps = bfsTraversal(number, (39,31), 0)
-    print(steps)
+    
+    # Part 2
     count = bfsTraversal(number, None, 50)
-    print(count)
+    
+    return newSolution(steps, count)
     
 def bfsTraversal(number: int, goal: coords|None, maxSteps: int) -> int:
     start = (1,1)
@@ -47,7 +51,7 @@ def isValid(c: coords) -> bool:
     return 0 <= row and 0 <= col
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 16, 13)
 
 '''
 Solve:

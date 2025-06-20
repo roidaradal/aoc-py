@@ -4,10 +4,10 @@
 from aoc import *
 
 def data(full: bool) -> list[int]:
-    line = readLines(17, 6, full)[0]
+    line = readFirstLine(17, 6, full)
     return toIntList(line, None)
 
-def solve():
+def solve() -> Solution:
     banks = data(full=True)
     numBanks = len(banks)
     done, count = {}, 0
@@ -25,13 +25,12 @@ def solve():
         count += 1
         state = tuple(banks)
         if state in done:
-            print(count)
-            print(count - done[state])
-            break
+            # Part 1 and 2
+            return newSolution(count, count-done[state])
         done[state] = count 
     
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 17, 6)
 
 '''
 Solve:

@@ -1,7 +1,7 @@
 # Advent of Code 2022 Day 02
 # John Roy Daradal 
 
-from aoc import readLines, getTotal, do
+from aoc import readLines, getTotal, do, Solution, newSolution
 
 rps = tuple[int,int]
 R,P,S = 1,2,3 
@@ -13,17 +13,18 @@ def data(T: dict[str,int], full: bool) -> list[rps]:
         return (T[p[0]], T[p[1]])
     return [fn(line) for line in readLines(22, 2, full)]
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     T = {'A': R, 'B': P, 'C': S, 'X': R, 'Y': P, 'Z': S}
     games = data(T, full=True)
-    total = getTotal(games, computeScore)
-    print(total)
+    return getTotal(games, computeScore)
 
-def part2():
+def part2() -> int:
     T = {'A': R, 'B': P, 'C': S, 'X': L, 'Y': D, 'Z': W}
     games = data(T, full=True)
-    total = getTotal(games, coerceScore)
-    print(total)
+    return getTotal(games, coerceScore)
 
 winsOver = {R: S, P: R, S: P}
 losesTo  = {S: R, R: P, P: S}
@@ -48,8 +49,7 @@ def coerceScore(cfg: rps) -> int:
     return computeScore((opp, you))
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 22, 2)
 
 '''
 Part1:

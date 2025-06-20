@@ -4,20 +4,20 @@
 from aoc import *
 
 def data(full: bool) -> dims2:
-    line = readLines(19, 4, full)[0]
+    line = readFirstLine(19, 4, full)
     return toDims2(line, '-')
 
-def part1():
+def solve() -> Solution:
     start, end = data(full=True)
     numbers = list(range(start,end))
-    count = countValid(numbers, isValid)
-    print(count)
 
-def part2():
-    start, end = data(full=True)
-    numbers = list(range(start,end))
-    count = countValid(numbers, isValid2)
-    print(count) 
+    # Part 1
+    count1 = countValid(numbers, isValid)
+
+    # Part 2
+    count2 = countValid(numbers, isValid2)
+    
+    return newSolution(count1, count2) 
 
 def isValid(number: int) -> bool:
     x = str(number)
@@ -37,8 +37,7 @@ def isValid2(number: int) -> bool:
     return 2 in sizes
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 19, 4)
 
 '''
 Part1:

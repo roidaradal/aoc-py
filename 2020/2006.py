@@ -17,15 +17,16 @@ def data(full: bool) -> list[Group]:
     groups.append(curr)
     return groups
 
-def part1():
+def solve() -> Solution:
     groups = data(full=True)
-    total = getTotal(groups, countYes)
-    print(total) 
+    
+    # Part 1
+    total1 = getTotal(groups, countYes)
 
-def part2():
-    groups = data(full=True)
-    total = getTotal(groups, countAllYes)
-    print(total) 
+    # Part 2
+    total2 = getTotal(groups, countAllYes)
+
+    return newSolution(total1, total2)
 
 def countYes(group: Group) -> int:
     qs = set()
@@ -41,8 +42,7 @@ def countAllYes(group: Group) -> int:
     return len([k for k,v in count.items() if v == len(group)])
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 20, 6)
 
 '''
 Part1:

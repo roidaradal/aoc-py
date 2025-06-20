@@ -10,21 +10,22 @@ class Marble:
         self.prev: Marble = self
 
 def data(full: bool) -> int2:
-    line = readLines(18, 9, full)[0]
+    line = readFirstLine(18, 9, full)
     p = line.split()
     return int(p[0]), int(p[-2])
 
-def part1():
+def solve() -> Solution:
     players, lastMarble = data(full=True)
-    maxScore = solve(players, lastMarble)
-    print(maxScore) 
 
-def part2():
-    players, lastMarble = data(full=True)
-    maxScore = solve(players, lastMarble * 100)
-    print(maxScore) 
+    # Part 1
+    score1 = maxScore(players, lastMarble)
+    
+    # Part 2
+    score2 = maxScore(players, lastMarble * 100)
 
-def solve(players: int, lastMarble: int) -> int:
+    return newSolution(score1, score2)
+
+def maxScore(players: int, lastMarble: int) -> int:
     score = [0 for _ in range(players)]
     player = 0
     curr = Marble(0)
@@ -53,8 +54,7 @@ def solve(players: int, lastMarble: int) -> int:
     return max(score)
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 18, 9)
 
 '''
 Solve:

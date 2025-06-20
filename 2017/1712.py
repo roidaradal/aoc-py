@@ -10,11 +10,14 @@ def data(full: bool) -> dict[int, list[int]]:
         edges[int(head)] = toIntList(tail, ',')
     return edges
 
-def solve():
+def solve() -> Solution:
     edges = data(full=True)
-    visited = findGroup(edges, 0)
-    print(len(visited)) 
 
+    # Part 1
+    visited = findGroup(edges, 0)
+    numVisited = len(visited)
+
+    # Part 2
     group = {}
     groupID = 0 
     for node in sorted(edges.keys()):
@@ -24,7 +27,8 @@ def solve():
             group[n] = groupID 
         groupID += 1
     numGroups = len(set(group.values()))
-    print(numGroups)
+    
+    return newSolution(numVisited, numGroups)
 
 def findGroup(edges: dict[int, list[int]], start: int) -> set[int]:
     visited: set[int] = set()
@@ -39,7 +43,7 @@ def findGroup(edges: dict[int, list[int]], start: int) -> set[int]:
     return visited
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 17, 12)
 
 '''
 Solve: 

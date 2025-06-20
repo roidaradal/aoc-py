@@ -15,19 +15,20 @@ def data(full: bool) -> list[int]:
     calories.append(curr)
     return calories
 
-def part1():
+def solve() -> Solution:
     calories = data(full=True)
-    print(max(calories)) 
 
-def part2():
-    calories = data(full=True)
+    # Part 1
+    maxCal = max(calories)
+
+    # Part 2 
     calories.sort(reverse=True)
     top3 = sum(calories[0:3])
-    print(top3) 
+
+    return newSolution(maxCal, top3)
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 22, 1)
 
 '''
 TopCalories:

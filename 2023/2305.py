@@ -38,15 +38,18 @@ def data(full: bool) -> Config:
             cfg.maps[key].append((src,dst,count))
     return cfg
 
-def part1():
+def solve() -> Solution:
     cfg = data(full=True)
-    locations = applyMapChain(cfg)
-    print(min(locations)) 
 
-def part2():
-    cfg = data(full=True)
+    # Part 1
+    locations = applyMapChain(cfg)
+    minLoc1 = min(locations)
+
+    # Part 2 
     locations = applyMapRangeChain(cfg)
-    print(min(locations)) 
+    minLoc2 = min(locations)
+
+    return newSolution(minLoc1, minLoc2)
 
 chain = ['seed','soil','fertilizer','water','light','temperature','humidity','location']
 
@@ -111,8 +114,7 @@ def findIntersection(ruleRange: int2, currRange: int2) -> tuple[int2|None, int2|
 
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 23, 5)
 
 '''
 Part1:

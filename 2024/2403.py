@@ -7,15 +7,17 @@ from aoc import *
 def data(full: bool) -> str:
     return ''.join(readLines(24, 3, full))
 
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
 pattern = r'mul\([0-9]{1,3},[0-9]{1,3}\)'
 
-def part1():
+def part1() -> int:
     text = data(full=True)
     commands = re.findall(pattern, text) 
-    total = getTotal(commands, execCommand)
-    print(total)
+    return getTotal(commands, execCommand)
 
-def part2():
+def part2() -> int:
     text = data(full=True)
     commands = [(m.start(), m.group(0)) for m in re.finditer(pattern, text)]
 
@@ -40,8 +42,7 @@ def part2():
 
     valid = lambda cmd: not any(x[0] <= cmd[0] <= x[1] for x in ignore)
     commands = [cmd[1] for cmd in commands if valid(cmd)]
-    total = getTotal(commands, execCommand)
-    print(total)
+    return getTotal(commands, execCommand)
 
 def execCommand(cmd: str) -> int:
     cmd = cmd.strip('mul()')
@@ -49,8 +50,7 @@ def execCommand(cmd: str) -> int:
     return a * b
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 24, 3)
 
 '''
 Part1:

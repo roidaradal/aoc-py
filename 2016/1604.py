@@ -29,19 +29,21 @@ class Room:
 def data(full: bool) -> list[Room]:
     return [Room(line) for line in readLines(16, 4, full)]
 
-def part1():
+def solve() -> Solution:
     rooms = data(full=True)
+    
+    # Part 1
     fn = lambda room: room.id if room.isReal else 0 
     total = getTotal(rooms, fn)
-    print(total) 
-
-def part2():
-    rooms = data(full=True)
-    goal = 'northpole-object-storage'
+    
+    # Part 2 
+    roomID = 0 
     for room in rooms:
-        if room.decrypt() == goal:
-            print(room.id)
+        if room.decrypt() == 'northpole-object-storage':
+            roomID = room.id
             break
+
+    return newSolution(total, roomID)
 
 def rotate(letter: str) -> str:
     if letter == 'z':
@@ -51,8 +53,7 @@ def rotate(letter: str) -> str:
     return chr(ord(letter)+1)
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 16, 4)
 
 '''
 Part1:

@@ -4,10 +4,13 @@
 from aoc import *
 
 def data(full: bool) -> list[int]:
-    line = readLines(18, 8, full)[0]
+    line = readFirstLine(18, 8, full)
     return toIntList(line, None)
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     numbers = data(full=True)
     limit = len(numbers)
     child, meta = numbers[:2]
@@ -27,9 +30,9 @@ def part1():
             child, meta = numbers[i], numbers[i+1]
             stack.append((child, meta))
             i += 2
-    print(total)
+    return total
 
-def part2():
+def part2() -> int:
     numbers = data(full=True)
     limit = len(numbers)
     child, meta = numbers[:2]
@@ -58,11 +61,10 @@ def part2():
             child, meta = numbers[i], numbers[i+1]
             stack.append((child, meta, []))
             i += 2
-    print(value)
+    return value
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 18, 8)
 
 '''
 Part1:

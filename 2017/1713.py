@@ -13,28 +13,29 @@ def data(full: bool) -> Scanners:
         scanner[k] = (0, r, 1)
     return scanner
 
-def solve():
+def solve() -> Solution:
     scanner = data(full=True)
     limit = max(scanner.keys()) + 1
 
+    # Part 1
     T: dict[int,Scanners] = {}
     T[0] = scanner 
     for t in range(1, limit):
         T[t] = nextState(T[t-1])
-    
-    penalty = getPenalty(T, 0, limit)
-    print(penalty)
+    penalty1 = getPenalty(T, 0, limit)
 
+    # Part 2
     delay = 0
     while True:
         t = limit + delay 
         T[t] = nextState(T[t-1])
         penalty = getPenalty(T, delay, limit, stopIfCaught=True)
         if penalty == 0:
-            print(delay)
             break
         del T[delay] # remove previous head, to keep T from growing too big
         delay += 1
+
+    return newSolution(penalty1, delay)
 
 def nextState(scanner: Scanners) -> Scanners:
     scanner2: Scanners = {}
@@ -64,7 +65,7 @@ def getPenalty(T: dict[int,Scanners], start: int, limit: int, stopIfCaught: bool
     return penalty
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 17, 13)
 
 '''
 Part1:

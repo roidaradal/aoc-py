@@ -16,25 +16,25 @@ def data(full: bool) -> list[strInt]:
             return ('guard', int(p[1].strip('#')))
     return [fn(line) for line in sorted(readLines(18, 4, full))]
 
-def part1():
+def solve() -> Solution:
     logs = data(full=True)
     sleep = process(logs)
 
+    # Part 1
     guard = max((sum(s.values()), guard) for guard,s in sleep.items())[1]
     minute = max((count,m) for m,count in sleep[guard].items())[1]
-    print(guard * minute)
+    part1 = guard * minute
 
-def part2():
-    logs = data(full=True)
-    sleep = process(logs)
-
+    # Part 2 
     guards = []
     for guard, s in sleep.items():
         count, minute = max((v,k) for k,v in s.items())
         guards.append((count, minute, guard))
 
     _, minute, guard = max(guards)
-    print(guard * minute) 
+    part2 = guard * minute
+
+    return newSolution(part1, part2)
 
 def process(logs: list[strInt]) -> dict[int,dict[int,int]]:
     limit = len(logs)
@@ -53,8 +53,7 @@ def process(logs: list[strInt]) -> dict[int,dict[int,int]]:
     return sleep
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 18, 4)
 
 '''
 Part1:

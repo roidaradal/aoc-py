@@ -24,14 +24,17 @@ def data(full: bool) -> list[tuple]:
             return (res, LET, v)
     return [fn(line) for line in readLines(15, 7, full)]
 
-def solve():
+def solve() -> Solution:
     commands = data(full=True)
-    a = solveA(commands) 
-    print(a)
+
+    # Part 1
+    a1 = solveA(commands) 
     
-    override = {'b' : a}
-    a = solveA(commands, override)
-    print(a) 
+    # Part 2
+    override = {'b' : a1}
+    a2 = solveA(commands, override)
+
+    return newSolution(a1, a2)
 
 def solveA(commands: list[tuple], override: dict[str,int]|None = None) -> int:
     value = {}
@@ -90,7 +93,7 @@ def getVars(items: list) -> tuple[list,list]: # vars, consts
     return vars, consts
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 15, 7)
 
 '''
 Solve:

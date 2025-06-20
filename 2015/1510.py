@@ -4,16 +4,18 @@
 from aoc import *
 
 def data(full: bool) -> str:
-    return readLines(15, 10, full)[0]
+    return readFirstLine(15, 10, full)
 
-def solve():
+def solve() -> Solution:
     text = data(full = True)
 
-    length = repeatExpand(text, 40)
-    print(length)
+    # Part 1
+    length1 = repeatExpand(text, 40)
 
-    length = repeatExpand(text, 50)
-    print(length)
+    # Part 2
+    length2 = repeatExpand(text, 50)
+
+    return newSolution(length1, length2)
 
 def repeatExpand(text: str, count: int) -> int:
     curr = text
@@ -33,7 +35,7 @@ def repeatExpand(text: str, count: int) -> int:
     return len(curr)
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 15, 10)
 
 '''
 Solve: 

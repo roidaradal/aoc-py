@@ -4,10 +4,13 @@
 from aoc import *
 
 def data(full: bool) -> int:
-    line = readLines(18, 14, full)[0]
+    line = readFirstLine(18, 14, full)
     return int(line)
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> str:
     steps = data(full=True)
     limit = steps + 10
     a, b = 0, 1
@@ -20,14 +23,15 @@ def part1():
         a = (a + 1 + scores[a]) % s 
         b = (b + 1 + scores[b]) % s 
     output = ''.join(str(x) for x in scores[steps:limit])
-    print(output) 
+    return output 
 
-def part2():
+def part2() -> int:
     goal = str(data(full=True))
     N = len(goal)
     M = N+1 
     a, b = 0, 1 
     scores = [3, 7]
+    left = 0
     while True:
         total = scores[a] + scores[b]
         for d in str(total):
@@ -40,15 +44,15 @@ def part2():
         if len(scores) < N: continue 
         suffix = ''.join(str(x) for x in scores[-M:])
         if suffix.startswith(goal):
-            print(len(scores)-M)
+            left = len(scores)-M
             break
         elif suffix.endswith(goal):
-            print(len(scores)-N)
-            return 
+            left = len(scores)-N
+            break 
+    return left
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 18, 14)
 
 '''
 Part1:

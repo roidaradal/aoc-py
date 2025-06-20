@@ -17,15 +17,18 @@ def data(full: bool) -> list[delta]:
             return (0,0)
     return [fn(line) for line in readLines(21, 2, full)]
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     moves = data(full=True)
     curr = (0,0)
     for d in moves:
         curr = move(curr, d)
     y,x = curr 
-    print(x*y) 
+    return x * y
 
-def part2():
+def part2() -> int:
     moves = data(full=True)
     y, x, a = 0, 0, 0 
     for dy, dx in moves:
@@ -34,11 +37,10 @@ def part2():
             y += a * dx 
         else:
             a += dy
-    print(x*y) 
+    return x * y
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 21, 2)
 
 '''
 Data:

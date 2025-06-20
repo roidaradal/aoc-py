@@ -8,13 +8,15 @@ def data(full: bool) -> list[list[int]]:
     fn = lambda line: toIntList(line, None)
     return [fn(line) for line in readLines(17, 2, full)]
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     numbersList = data(full=True) 
     fn = lambda numbers: max(numbers) - min(numbers) 
-    total = getTotal(numbersList, fn)
-    print(total) 
+    return getTotal(numbersList, fn)
 
-def part2():
+def part2() -> int:
     numbersList = data(full=True) 
     def fn(numbers: list[int]) -> int:
         for pair in itertools.combinations(numbers, 2):
@@ -22,12 +24,10 @@ def part2():
             if b % a == 0:
                 return b // a 
         return 0
-    total = getTotal(numbersList, fn)
-    print(total)
+    return getTotal(numbersList, fn)
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 17, 2)
 
 '''
 Part1:

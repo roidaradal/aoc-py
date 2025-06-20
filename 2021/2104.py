@@ -49,17 +49,22 @@ def data(full: bool) -> tuple[list[int], list[Bingo]]:
     cards.append(Bingo(card))
     return (numbers, cards)
 
-def part1():
+def solve() -> Solution:
     numbers, cards = data(full = True)
-    playBingo(numbers, cards, 1)
 
-def part2():
-    numbers, cards = data(full = True)
-    playBingo(numbers, cards, len(cards))
+    # Part 1
+    score1 = playBingo(numbers, cards, 1)
+
+    # Part 2 
+    score2 = playBingo(numbers, cards, len(cards))
+
+    return newSolution(score1, score2)
     
-def playBingo(numbers: list[int], cards: list[Bingo], targetWinnerCount: int):
+def playBingo(numbers: list[int], cards: list[Bingo], targetWinnerCount: int) -> int:
     winners = set()
+    score = 0
     for number in numbers:
+        stop = False
         for player, card in enumerate(cards):
             if player in winners: continue 
 
@@ -68,12 +73,13 @@ def playBingo(numbers: list[int], cards: list[Bingo], targetWinnerCount: int):
                 winners.add(player)
             if len(winners) == targetWinnerCount:
                 score = number * card.score 
-                print(score)
-                return
+                stop = True 
+                break
+        if stop: break
+    return score
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 21, 4)
 
 '''
 PlayBingo:

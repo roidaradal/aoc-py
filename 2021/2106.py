@@ -4,18 +4,19 @@
 from aoc import *
 
 def data(full: bool) -> list[int]:
-    line = readLines(21, 6, full)[0]
+    line = readFirstLine(21, 6, full)
     return toIntList(line, ',')
 
-def part1():
+def solve() -> Solution:
     fish = data(full=True)
-    count = simulate(fish, 80)
-    print(count)
 
-def part2():
-    fish = data(full=True)
-    count = simulate(fish, 256)
-    print(count)
+    # Part 1
+    count1 = simulate(fish, 80)
+
+    # Part 2 
+    count2 = simulate(fish, 256)
+
+    return newSolution(count1, count2)
 
 def simulate(fish: list[int], days: int) -> int:
     groups = defaultdict(int)
@@ -35,8 +36,7 @@ def simulate(fish: list[int], days: int) -> int:
     return sum(groups.values())
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 21, 6)
 
 '''
 Simulate:

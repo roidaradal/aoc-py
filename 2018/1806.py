@@ -9,7 +9,10 @@ def data(full: bool) -> list[coords]:
         return y,x
     return [fn(line) for line in readLines(18, 6, full)]
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     points = data(full=True)
     rows = max(c[0] for c in points) + 1
     cols = max(c[1] for c in points) + 1
@@ -25,18 +28,17 @@ def part1():
                     edge.add(idx)
     counts = [(x,i) for i,x in count.items() if i not in edge]
     maxArea = max(counts)[0]
-    print(maxArea)
+    return maxArea
 
 
-def part2():
+def part2() -> int:
     points = data(full=True) 
     rows = max(c[0] for c in points) + 1
     cols = max(c[1] for c in points) + 1
     goal = 10_000
     fn = lambda c: sum(manhattan(c, pt) for pt in points) < goal
     cells = [(row,col) for row in range(rows) for col in range(cols)]
-    count = countValid(cells, fn)
-    print(count)
+    return countValid(cells, fn)
 
 def closest(c: coords, points: list[coords]) -> int|None:
     d = {}
@@ -48,8 +50,7 @@ def closest(c: coords, points: list[coords]) -> int|None:
     return indexes[0] if len(indexes) == 1 else None
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 18, 6)
 
 '''
 Part1:

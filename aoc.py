@@ -1,7 +1,10 @@
 from collections.abc import Callable, Iterator
 from collections import defaultdict
 from typing import Any
-import time, hashlib
+from dotenv import load_dotenv
+import time, hashlib, os, sys
+
+load_dotenv()
 
 coords = tuple[int,int]
 int2   = tuple[int,int]
@@ -14,6 +17,7 @@ strInt = tuple[str,int]
 str2   = tuple[str,str]
 vector = tuple[coords,delta]
 IntGrid = list[list[int]]
+Solution = tuple[str,str]
 
 def toDims2(line: str, sep: str|None) -> dims2:
     a,b = [int(x.strip()) for x in line.split(sep)]
@@ -177,17 +181,63 @@ def surround4(c: coords) -> list[coords]:
     ]
 #####################################################################################
 
-def do(fn: Callable):
+def do(fn: Callable, year: int, day: int):
+    args = sys.argv[1:]
+    testMode = len(args) > 0 and args[0] == 'test'
+    
     start = time.time()
-    fn()
+    ans1, ans2 = fn()
+
+    if testMode:
+        sol1, sol2  = getSolution(year, day)
+        if ans1 == sol1:
+            print('OK1:', ans1)
+        else:
+            print('Part1: Exp vs Got:\n%s\n%s' % (sol1, ans1))
+        if ans2 == sol2:
+            print('OK2:', ans2)
+        else:
+            print('Part2: Exp vs Got:\n%s\n%s' % (sol2, ans2))
+    else:
+        print(ans1)
+        print(ans2)
+
     duration = time.time() - start 
     print('\nTime: %.2fs' % duration)
-    print('-----' * 5)
+
+
+def rootDir():
+    root = os.getenv('AOC_DATA_DIR')
+    if root is None:
+        root = '../aoc-data'
+    return root
 
 def readLines(year: int, day: int, full: bool, strip: bool = True) -> list[str]:
-    folder = 'data' if full else 'test'
-    path = '%s/%d%.2d.txt' % (folder, year, day)
+    folder = '20%d' % year if full else 'test'
+    path = '%s/%s/%d%.2d.txt' % (rootDir(), folder, year, day)
     f = open(path, 'r')
     lines = [x.strip() if strip else x for x in f.readlines()]
     f.close()
     return lines 
+
+def readFirstLine(year: int, day: int, full: bool, strip: bool = True) -> str:
+    return readLines(year, day, full, strip)[0]
+
+def getSolution(year: int, day: int) -> Solution:
+    path = '%s/solutions/all.csv' % rootDir()
+    f = open(path, 'r')
+    lines = [x.strip() for x in f.readlines()]
+    f.close()
+    solution: dict[str,Solution] = {}
+    for line in lines:
+        p = line.split('|')
+        k = p[0] + p[1]
+        v = (p[2], p[3])
+        solution[k] = v
+    key = '%d%.2d' % (year, day)
+    return solution[key]
+
+def newSolution(part1: Any, part2: Any) -> Solution:
+    sol1 = str(part1)
+    sol2 = str(part2)
+    return (sol1, sol2)

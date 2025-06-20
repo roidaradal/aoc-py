@@ -39,12 +39,16 @@ def data(full: bool) -> Problem:
                 p.next[pt] = {}
     return p
 
-def solve():
+def solve() -> Solution:
     p = data(full=True)
-    pt = findCartPoint(p, True)
-    print(pt)
-    pt = findCartPoint(p, False)
-    print(pt) 
+
+    # Part 1
+    pt1 = findCartPoint(p, True)
+
+    # Part 2
+    pt2 = findCartPoint(p, False)
+    
+    return newSolution(pt1, pt2)
 
 def findCartPoint(p: Problem, firstCrash: bool) -> str:
     cartTurn = {0: L, 1: (0,0), 2: R}
@@ -86,7 +90,7 @@ def findCartPoint(p: Problem, firstCrash: bool) -> str:
 
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 18, 13)
 
 '''
 Data:

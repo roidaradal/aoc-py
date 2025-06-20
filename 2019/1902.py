@@ -5,26 +5,31 @@ import itertools
 from aoc import *
 
 def data(full: bool) -> list[int]:
-    line = readLines(19, 2, full)[0]
+    line = readFirstLine(19, 2, full)
     return toIntList(line, ',')
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     numbers = data(full=True)
     numbers[1] = 12
     numbers[2] = 2 
     output = runProgram(numbers)
-    print(output)
+    return output
 
-def part2():
+def part2() -> int:
     numbers = data(full=True)
     goal =  19690720 
+    output = 0
     for (noun,verb) in itertools.product(range(100), repeat=2):
         memory = numbers[:]
         memory[1] = noun 
         memory[2] = verb 
         if runProgram(memory) == goal:
-            print((100*noun) + verb)
-            return
+            output = (100*noun) + verb
+            break
+    return output
 
 def runProgram(numbers: list[int]) -> int: 
     i = 0 
@@ -40,8 +45,7 @@ def runProgram(numbers: list[int]) -> int:
     return numbers[0]
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 19, 2)
 
 '''
 Part1:

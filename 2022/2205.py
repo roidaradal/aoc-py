@@ -31,15 +31,16 @@ def data(full: bool) -> tuple[list[list[str]], list[cmd]]:
             moves.append((count, src, dst))
     return stacks, moves
 
-def part1():
+def solve() -> Solution:
+    # Part 1
     stacks, moves = data(full=True)
-    top = processMoves(stacks, moves, True)
-    print(top)
+    top1 = processMoves(stacks, moves, True)
 
-def part2():
+    # Part 2 
     stacks, moves = data(full=True)
-    top = processMoves(stacks, moves, False)
-    print(top)
+    top2 = processMoves(stacks, moves, False)
+
+    return newSolution(top1, top2)
 
 def processMoves(stacks: list[list[str]], moves: list[cmd], reverse: bool) -> str:
     for count, idx1, idx2 in moves:
@@ -55,8 +56,7 @@ def transfer(stacks: list[list[str]], count: int, idx1: int, idx2: int, reverse:
     stacks[idx2] = move
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 22, 5)
 
 '''
 ProcessMoves:

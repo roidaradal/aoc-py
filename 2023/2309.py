@@ -8,13 +8,16 @@ def data(full: bool) -> list[list[int]]:
         return toIntList(line, None)
     return [fn(line) for line in readLines(23, 9, full)]
 
-def solve():
+def solve() -> Solution:
     numberLists = data(full=True)
-    total = getTotal(numberLists, getNext)
-    print(total)
+
+    # Part 1
+    total1 = getTotal(numberLists, getNext)
     
-    total = getTotal(numberLists, getPrev)
-    print(total)
+    # Part 2
+    total2 = getTotal(numberLists, getPrev)
+
+    return newSolution(total1, total2)
 
 def getNext(numbers: list[int]) -> int:
     gap = 0
@@ -37,7 +40,7 @@ def getPrev(numbers: list[int]) -> int:
     return fronts[0]
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 23, 9)
 
 '''
 Part1:

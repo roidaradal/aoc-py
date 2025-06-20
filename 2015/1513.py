@@ -17,18 +17,21 @@ def data(full: bool) -> Graph:
         g.edges[(a,b)] = w
     return g 
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     g = data(full=True)
     vertices = sorted(g.vertices)
     head, rest = vertices[0], vertices[1:]
     maxScore = findBestSeating(head, rest, g.edges)
-    print(maxScore)
+    return maxScore
 
-def part2():
+def part2() -> int:
     g = data(full=True)
     head, rest = 'Me', list(g.vertices)
     maxScore = findBestSeating(head, rest, g.edges)
-    print(maxScore)
+    return maxScore
 
 def findBestSeating(head: str, rest: list[str], edges: EdgeMap) -> int:
     maxScore = -float('inf')
@@ -49,8 +52,7 @@ def computeScore(seating: tuple[str,...], edges: EdgeMap) -> int:
     return total
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 15, 13)
 
 '''
 Part1:

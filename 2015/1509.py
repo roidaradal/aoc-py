@@ -17,16 +17,17 @@ def data(full: bool) -> Graph:
         g.edges[(v2,v1)] = w
     return g
 
-def solve():
+def solve() -> Solution:
     g = data(full=True)
     minDistance = float('inf')
     maxDistance = 0
     for path in itertools.permutations(g.vertices):
         distance = computeDistance(path, g.edges)
+        # Part 1
         minDistance = min(minDistance, distance)
+        # Part 2
         maxDistance = max(maxDistance, distance)
-    print(minDistance) 
-    print(maxDistance)
+    return newSolution(minDistance, maxDistance)
 
 def computeDistance(path: tuple, edges: EdgeMap) -> int:
     indexes = list(range(1, len(path)))
@@ -34,7 +35,7 @@ def computeDistance(path: tuple, edges: EdgeMap) -> int:
     return getTotal(indexes, fn)
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 15, 9)
 
 '''
 Solve:

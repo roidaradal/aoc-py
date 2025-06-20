@@ -7,17 +7,20 @@ from aoc import *
 def data(full: bool) -> list[str]:
     return readLines(23, 3, full)
 
-def part1():
+def solve() -> Solution: 
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     grid = data(full=True)
     symbols = findSymbols(grid)
     total = sum(findValidNumbers(grid, symbols))
-    print(total)
+    return total
 
-def part2():
+def part2() -> int:
     grid = data(full = True)
     gears = findGears(grid)
     total = sum(findGearRatios(grid, gears))
-    print(total) 
+    return total
 
 nonSymbol = '0123456789.'
 def findSymbols(grid: list[str]) -> set[coords]:
@@ -93,8 +96,7 @@ def getAdjacent(rowRange: int3, bounds: dims2) -> list[coords]:
     return adjacent
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 23, 3)
 
 '''
 Part1:

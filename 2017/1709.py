@@ -4,9 +4,9 @@
 from aoc import *
 
 def data(full: bool) -> str:
-    return readLines(17, 9, full)[0]
+    return readFirstLine(17, 9, full)
 
-def solve():
+def solve() -> Solution:
     stream = data(full=True)
     i, limit = 0, len(stream)
     count, total = 0, 0
@@ -29,11 +29,11 @@ def solve():
         elif char == '<':
             garbage = True
         i += 1
-    print(total)
-    print(count) 
+    # Part 1 and 2 
+    return newSolution(total, count)
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 17, 9)
 
 '''
 Solve:

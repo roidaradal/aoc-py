@@ -20,17 +20,18 @@ def data(full: bool) -> Graph:
         g.parentOf[child] = node
     return g
 
-def part1():
+def solve() -> Solution:
     g = data(full=True)
+    
+    # Part 1
     total = bfs(g, 'COM', None)
-    print(total) 
 
-def part2():
-    g = data(full=True)
+    # Part 2 
     start = g.parentOf['YOU']
     goal  = g.parentOf['SAN']
     depth = bfs(g, start, goal)
-    print(depth) 
+
+    return newSolution(total, depth)
 
 def bfs(g: Graph, start: str, goal: str|None) -> int:
     visited = {}
@@ -48,8 +49,7 @@ def bfs(g: Graph, start: str, goal: str|None) -> int:
     return total
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 19, 6)
 
 '''
 Part1:

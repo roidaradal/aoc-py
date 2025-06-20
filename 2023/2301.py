@@ -6,15 +6,16 @@ from aoc import *
 def data(full: bool) -> list[str]:
     return readLines(23, 1, full)
 
-def part1():
+def solve() -> Solution:
     lines = data(full=True)
-    total = getTotal(lines, extractDigits)
-    print(total) 
+    
+    # Part 1
+    total1 = getTotal(lines, extractDigits)
 
-def part2():
-    lines = data(full=True)
-    total = getTotal(lines, extractNumber)
-    print(total) 
+    # Part 2
+    total2 = getTotal(lines, extractNumber)
+
+    return newSolution(total1, total2)
 
 def extractDigits(line: str) -> int:
     first, last = 0, 0 
@@ -58,8 +59,7 @@ def update(first: int, last: int, digit: int) -> tuple[int,int]:
     return first, last
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 23, 1)
 
 '''
 Part1:

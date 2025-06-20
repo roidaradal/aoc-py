@@ -6,13 +6,15 @@ from aoc import *
 def data(full: bool) -> list[int]:
     return [int(line) for line in readLines(18, 1, full)]
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     numbers = data(full=True)
     fn = lambda x: x 
-    total = getTotal(numbers, fn)
-    print(total) 
+    return getTotal(numbers, fn)
 
-def part2():
+def part2() -> int:
     changes = data(full=True)
     limit = len(changes)
     done = set()
@@ -23,11 +25,10 @@ def part2():
             break
         done.add(curr)
         i = (i+1) % limit 
-    print(curr)
+    return curr
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 18, 1)
 
 '''
 Part1:

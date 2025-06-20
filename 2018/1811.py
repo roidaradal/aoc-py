@@ -4,18 +4,22 @@
 from aoc import *
 
 def data(full: bool) -> int:
-    line = readLines(18, 11, full)[0]
+    line = readFirstLine(18, 11, full)
     return int(line)
 
-def solve():
+def solve() -> Solution:
     serial = data(full=True)
     grid = buildGrid(serial) 
 
+    # Part 1
     _, row, col = findMaxPower(grid, 3)
-    print('%d,%d' % (col,row))
+    part1 = '%d,%d' % (col,row)
 
+    # Part 2
     row, col, side = findMaxPowerSide(grid)
-    print('%d,%d,%d' % (col,row,side))
+    part2 = '%d,%d,%d' % (col,row,side)
+
+    return newSolution(part1, part2)
 
 rows, cols = 300, 300
 def buildGrid(serial: int) -> IntGrid:
@@ -70,7 +74,7 @@ def findMaxPowerSide(grid: IntGrid) -> int3:
     return row+1, col+1, side
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 18, 11)
 
 '''
 Part1:

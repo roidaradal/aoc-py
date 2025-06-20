@@ -17,15 +17,16 @@ def data(full: bool) -> tuple[list[line], dims2]:
         lines.append(((y1,x1),(y2,x2)))
     return (lines, (rows+1, cols+1))
 
-def part1():
+def solve() -> Solution:
     lines, bounds = data(full = True)
-    count = countIntersection(lines, bounds, False)
-    print(count)
 
-def part2():
-    lines, bounds = data(full = True)
-    count = countIntersection(lines, bounds, True)
-    print(count)
+    # Part 1
+    count1 = countIntersection(lines, bounds, False)
+
+    # Part 2
+    count2 = countIntersection(lines, bounds, True)
+
+    return newSolution(count1, count2)
 
 def countIntersection(lines: list[line], bounds: dims2, withDiagonal: bool) -> int:
     rows, cols = bounds 
@@ -63,8 +64,7 @@ def addDiagonal(g: list[list[int]], x1: int, y1: int, x2: int, y2: int):
         g[y][x] += 1
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 21, 5)
 
 '''
 CountIntersection:

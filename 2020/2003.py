@@ -12,15 +12,16 @@ def data(full: bool, d: delta) -> list[str]:
     repeat = math.ceil(needW / w)
     return [line * repeat for line in lines]
 
-def part1():
+def solve() -> Solution:
+    # Part 1
     count = countSlope((1,3), full=True)
-    print(count)
-
-def part2():
+    
+    # Part 2
     product = 1 
     for d in [(1,1), (1,3), (1,5), (1,7), (2,1)]:
         product *= countSlope(d, full=True)
-    print(product) 
+
+    return newSolution(count, product)
 
 def numSteps(height: int, dy: int) -> int:
     return (height-1) // dy
@@ -38,8 +39,7 @@ def countSlope(d: delta, full: bool) -> int:
     return count
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 20, 3)
 
 '''
 Data:

@@ -16,25 +16,28 @@ def data(full: bool) -> tuple[dict[int,str],dict[str,str]]:
         T[k] = v 
     return pots, T
 
-def solve():
+def solve() -> Solution:
     pots, T = data(full=True)
     done: dict[str,int] = defaultdict(int)
     done[stateKey(pots)] = 0
+    score20, total = 0, 0
     for t in range(200):
         transform(pots, T)
         score = scoreOf(pots)
         if t == 19:
-            print(score)
+            # Part 1
+            score20 = score
         state = stateKey(pots)
         if state in done:
+            # Part 2
             N = 50_000_000_000 
             left = N-t 
             prev = done[state]
             step = score - prev 
             total = prev + (left*step)
-            print(total)
             break
         done[state] = score
+    return newSolution(score20, total)
 
 def transform(pots: dict[int,str], T: dict[str,str]):
     # Pad left side 
@@ -75,7 +78,7 @@ def scoreOf(pots: dict[int,str]) -> int:
     return sum(i for i,b in pots.items() if b == '#')
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 18, 12)
 
 '''
 Solve:

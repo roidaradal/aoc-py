@@ -7,15 +7,17 @@ def data(full: bool) -> list[dims3]:
     fn = lambda line: toDims3(line, None)
     return [fn(line) for line in readLines(16, 3, full)]
 
-def part1():
+def solve() -> Solution:
     triples = data(full=True)
-    count = countValid(triples, isValid)
-    print(count)
 
-def part2():
-    triples = readVertical(data(full=True))
-    count = countValid(triples, isValid)
-    print(count) 
+    # Part 1
+    count1 = countValid(triples, isValid)
+
+    # Part 2 
+    triples = readVertical(triples)
+    count2 = countValid(triples, isValid)
+
+    return newSolution(count1, count2)
 
 def isValid(triple: dims3) -> bool:
     a,b,c = triple 
@@ -29,8 +31,7 @@ def readVertical(t: list[dims3]) -> list[dims3]:
     return t2
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 16, 3)
 
 '''
 Part1:

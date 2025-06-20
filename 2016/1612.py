@@ -24,10 +24,14 @@ def data(full: bool) -> list[Command]:
         return ('?', 0, 0)
     return [fn(line) for line in readLines(16, 12, full)]
 
-def solve():
+def solve() -> Solution:
     commands = data(full=True)
     limit = len(commands)
-    overrides: list[None|dict[str,int]] = [None, {'c': 1}]
+    overrides: list[None|dict[str,int]] = [
+        None,       # Part 1
+        {'c': 1},   # Part 2
+    ]
+    values = []
     for override in overrides:
         reg = {k: 0 for k in 'abcd'}
         if override != None:
@@ -49,10 +53,12 @@ def solve():
                 if type(value) == int and type(p2) == int:
                     jmp = p2 if value != 0 else 1
                     idx += jmp
-        print(reg['a'])
+        values.append(reg['a'])
+    
+    return newSolution(values[0], values[1])
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 16, 12)
 
 '''
 Solve:

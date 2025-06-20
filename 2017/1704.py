@@ -6,17 +6,18 @@ from aoc import *
 def data(full: bool) -> list[list[str]]:
     return [line.split() for line in readLines(17, 4, full)]
 
-def part1():
+def solve() -> Solution:
     phrases = data(full=True)
-    fn = lambda phrase: isValid(phrase, False)
-    count = countValid(phrases, fn)
-    print(count) 
 
-def part2():
-    phrases = data(full=True)
-    fn = lambda phrase: isValid(phrase, True)
-    count = countValid(phrases, fn)
-    print(count)
+    # Part 1
+    fn1 = lambda phrase: isValid(phrase, False)
+    count1 = countValid(phrases, fn1)
+
+    # Part 2
+    fn2 = lambda phrase: isValid(phrase, True)
+    count2 = countValid(phrases, fn2)
+
+    return newSolution(count1, count2)
 
 def isValid(phrase: list[str], sortWord: bool) -> bool:
     freq = defaultdict(int) 
@@ -26,8 +27,7 @@ def isValid(phrase: list[str], sortWord: bool) -> bool:
     return all(count == 1 for count in freq.values())
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 17, 4)
 
 '''
 Solve:

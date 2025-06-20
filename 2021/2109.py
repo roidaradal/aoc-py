@@ -6,20 +6,20 @@ from aoc import *
 def data(full: bool) -> IntGrid:
     return [toIntLine(line) for line in readLines(21, 9, full)]
 
-def solve():
+def solve() -> Solution:
     grid = data(full=True)
 
     # Part 1
     low = findLowPoints(grid)
     total = sum(pt[2] + 1 for pt in low)
-    print(total)
 
     # Part 2
     basins = [basinSize(grid, (y,x)) for y,x,_ in low]
     basins.sort(reverse=True)   # Get the 3 biggest basin sizes 
     b1,b2,b3 = basins[0:3]
-    print(b1*b2*b3)
+    product = b1*b2*b3
 
+    return newSolution(total, product)
 
 def findLowPoints(grid: IntGrid) -> list[int3]:
     low: list[int3] = []
@@ -50,7 +50,7 @@ def basinSize(grid: IntGrid, center: coords) -> int:
     return len(visited)
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 21, 9)
 
 '''
 Part1:

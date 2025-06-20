@@ -10,14 +10,17 @@ def data(full: bool) -> list[int2]:
         return count, start
     return [fn(line) for line in readLines(16, 15, full)]
 
-def solve():
+def solve() -> Solution:
     discs = data(full=True) 
-    t = findPressTime(discs)
-    print(t)
     
+    # Part 1
+    t1 = findPressTime(discs)
+    
+    # Part 2
     discs.append((11, 0))
-    t = findPressTime(discs)
-    print(t)
+    t2 = findPressTime(discs)
+
+    return newSolution(t1, t2)
 
 def findPressTime(discs: list[int2]) -> int:
     t = 0
@@ -36,7 +39,7 @@ def positions(discs: list[int2], t: int) -> list[int]:
     return pos 
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 16, 15)
 
 '''
 Solve:

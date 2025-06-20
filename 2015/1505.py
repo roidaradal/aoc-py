@@ -6,15 +6,16 @@ from aoc import *
 def data(full: bool) -> list[str]:
     return readLines(15, 5, full)
 
-def part1():
+def solve() -> Solution:
     words = data(full=True)
-    count = countValid(words, isNice)
-    print(count)
 
-def part2():
-    words = data(full=True)
-    count = countValid(words, isNice2)
-    print(count)
+    # Part 1
+    count1 = countValid(words, isNice)
+
+    # Part 2 
+    count2 = countValid(words, isNice2)
+    
+    return newSolution(count1, count2)
 
 invalid = ('ab','cd','pq','xy')
 vowels = 'aeiou'
@@ -39,7 +40,7 @@ def isNice2(word: str) -> bool:
         return False
     
     # Check if has pair of two letters that appears >= 2 with no overlap
-    pairs = substringPositions(word, 2)
+    pairs = substringGroups(word, 2)
     for idxs in pairs.values():
         if len(idxs) >= 3:
             return True 
@@ -48,16 +49,15 @@ def isNice2(word: str) -> bool:
             return True    
     return False
 
-def substringPositions(word: str, length: int) -> defaultdict[str,list[int]]:
-    at = defaultdict(list)
+def substringGroups(word: str, length: int) -> dict[str,list[int]]:
+    at: dict[str,list[int]] = defaultdict(list)
     for i in range(len(word)-(length-1)):
         sub = word[i:i+length]
         at[sub].append(i)
     return at
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 15, 5)
 
 '''
 Part1:

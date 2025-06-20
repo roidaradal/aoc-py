@@ -4,7 +4,7 @@
 from aoc import *
 
 def data(full: bool) -> list[str]:
-    line = readLines(17, 11, full)[0]
+    line = readFirstLine(17, 11, full)
     return splitStr(line, ',')
 
 N, S, NW, NE, SW, SE = 'n', 's', 'nw', 'ne', 'sw', 'se'
@@ -29,7 +29,7 @@ RES = {
 }
 
 
-def solve():
+def solve() -> Solution:
     steps = data(full=True)
     path: list[str] = []
     maxSteps = 0 
@@ -50,12 +50,11 @@ def solve():
         else:
             path.append(step)
         maxSteps = max(maxSteps, len(path))
-
-    print(len(path))
-    print(maxSteps)
+    # Part 1 and 2 
+    return newSolution(len(path), maxSteps)
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 17, 11)
 
 '''
 Solve: 

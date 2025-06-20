@@ -6,32 +6,33 @@ from aoc import *
 def data(full: bool) -> list[int]:
     return [int(line) for line in readLines(17, 5, full)]
 
-def part1():
+def solve() -> Solution:
+    # Part 1
     jumps = data(full=True)
-    increment = lambda jump: 1 
-    count = countJumps(jumps, increment)
-    print(count)
+    count1 = countJumps(jumps, False)
 
-def part2():
+    # Part 2
     jumps = data(full=True)
-    increment = lambda jump: -1 if jump >= 3 else 1
-    count = countJumps(jumps, increment)
-    print(count) 
+    count2 = countJumps(jumps, True)
 
-def countJumps(jumps: list[int], increment: Callable) -> int: 
+    return newSolution(count1, count2)
+
+def countJumps(jumps: list[int], clip: bool) -> int: 
     limit = len(jumps)
     i, count = 0, 0 
     while 0 <= i < limit: 
         jump = jumps[i]
-        jumps[i] += increment(jump)
+        increment = 1 
+        if clip and jump >= 3:
+            increment = -1
+        jumps[i] += increment
         i += jump 
         count += 1
     return count
 
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 17, 5)
 
 '''
 Solve:

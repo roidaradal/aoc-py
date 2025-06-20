@@ -4,11 +4,13 @@
 from aoc import *
 
 def data(full: bool) -> str:
-    return readLines(16, 14, full)[0]
+    return readFirstLine(16, 14, full)
 
-def solve():
+def solve() -> Solution:
     word = data(full=True)
     limit = 64 
+    values = []
+    # Part 1 and 2
     for hashFn in [hashFn1, hashFn2]:
         keys = []
         hashOf = {}
@@ -27,7 +29,8 @@ def solve():
                 if goal in hashOf[k]:
                     keys.append(i)
                     break 
-        print(keys[-1])
+        values.append(keys[-1])
+    return newSolution(values[0], values[1])
 
 def findTriple(h: str) -> str:
     curr, count = '', 0 
@@ -50,7 +53,7 @@ def hashFn2(word: str, i: int) -> str:
     return word
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 16, 14)
 
 '''
 Solve: 

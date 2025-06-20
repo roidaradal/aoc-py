@@ -6,7 +6,7 @@ from aoc import *
 def data(full: bool) -> list[list[int]]:
     return [toIntLine(line) for line in readLines(24, 10, full)]
 
-def solve():
+def solve() -> Solution:
     grid = data(full=True)
     start: list[coords] = []
     for row, line in enumerate(grid):
@@ -17,11 +17,12 @@ def solve():
     rating: list[int] = []
     for c in start:
         reached = count9(c, grid)
+        # Part 1
         score.append(len(reached))
+        # Part 2
         rating.append(sum(reached.values()))
     
-    print(sum(score))
-    print(sum(rating))
+    return newSolution(sum(score), sum(rating))
 
 def count9(start: coords, grid: list[list[int]]) -> dict[coords,int]:
     bounds = getBounds(grid)
@@ -43,7 +44,7 @@ def count9(start: coords, grid: list[list[int]]) -> dict[coords,int]:
 
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 24, 10)
 
 '''
 Solve:

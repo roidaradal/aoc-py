@@ -19,17 +19,18 @@ def data(full: bool) -> tuple[dict[int,set[int]], list[list[int]]]:
         book[after].add(before)
     return book, pages
 
-def part1():
+def solve() -> Solution:
     rules, pages = data(full=True)
-    fn = lambda numbers: numbers[len(numbers)//2] if isValid(numbers, rules) else 0
-    total = getTotal(pages, fn)
-    print(total) 
 
-def part2():
-    rules, pages = data(full=True)
-    fn = lambda numbers: correctOrderMid(numbers, rules)
-    total = getTotal(pages, fn) 
-    print(total)
+    # Part 1
+    fn1 = lambda numbers: numbers[len(numbers)//2] if isValid(numbers, rules) else 0
+    total1 = getTotal(pages, fn1)
+
+    # Part 2
+    fn2 = lambda numbers: correctOrderMid(numbers, rules)
+    total2 = getTotal(pages, fn2) 
+
+    return newSolution(total1, total2)
 
 def isValid(numbers: list[int], rules: dict[int,set[int]]) -> bool:
     for i in range(len(numbers)-1):
@@ -58,8 +59,7 @@ def correctOrderMid(numbers: list[int], rules: dict[int,set[int]]) -> int:
     return 0 if valid else numbers[len(numbers)//2]
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 24, 5)
 
 '''
 Part1:

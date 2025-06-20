@@ -5,15 +5,18 @@ import math
 from aoc import * 
 
 def data(full: bool) -> int:
-    line = readLines(17, 3, full)[0]
+    line = readFirstLine(17, 3, full)
     return int(line)
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     x = data(full=True)
     c = spiralCoords(x)
-    print(manhattan(c)) 
+    return manhattan(c)
 
-def part2():
+def part2() -> int:
     goal = data(full=True)
     spiral: dict[coords,int] = {(0,0) : 1}
     values = [0, 1] 
@@ -25,7 +28,7 @@ def part2():
         values.append(value)
         spiral[curr] = x 
         x +=1 
-    print(value)
+    return value
 
 def spiralLayer(x: int) -> int:
     dims = math.ceil(math.sqrt(x))
@@ -65,8 +68,7 @@ def spiralCoords(x: int) -> coords:
         return (offset, layer)
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 17, 3)
 
 '''
 Part1:

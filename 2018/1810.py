@@ -15,7 +15,7 @@ def data(full: bool) -> list[Particle]:
         return (y,x), (dy,dx)
     return [fn(line) for line in readLines(18, 10, full)]
 
-def solve():
+def solve() -> Solution:
     particles = data(full=True)
     areas, states = [], []
     for i in range(15_000):
@@ -27,10 +27,10 @@ def solve():
         states.append(particles2)
         area = computeArea(particles2)
         areas.append((area, i))
-    
+    # Part 1 and 2
     _, idx = min(areas)
     display(states[idx])
-    print(idx+1)
+    return newSolution("", idx+1)
 
 def computeArea(particles: list[Particle]) -> int:
     (y1,x1), (y2,x2) = computeBounds(particles)
@@ -58,7 +58,7 @@ def computeBounds(particles: list[Particle]) -> tuple[coords, coords]:
     return (y1,x1), (y2,x2)
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 18, 10)
 
 '''
 Solve:

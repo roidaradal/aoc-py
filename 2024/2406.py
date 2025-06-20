@@ -26,15 +26,18 @@ def data(full: bool) -> Config:
                 cfg.dir = U 
     return cfg
 
-def part1():
+def solve() -> Solution:
     cfg = data(full=True)
-    visited, _ = findExit(cfg, cfg.start, cfg.dir, {})
-    print(len(visited)) 
 
-def part2():
-    cfg = data(full=True)
-    count = countLoopPoints(cfg)
-    print(count) 
+    # Part 1
+    visited, _ = findExit(cfg, cfg.start, cfg.dir, {})
+    numVisited = len(visited)
+
+    # Part 2
+    loopPoints = countLoopPoints(cfg)
+
+    return newSolution(numVisited, loopPoints)
+
 
 def findExit(cfg: Config, start: coords, d: delta, previsit: History, obstacle: coords|None = None) -> tuple[History, bool]:
     c = start 
@@ -83,8 +86,7 @@ def countLoopPoints(cfg: Config) -> int:
     return len(obstacles)
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 24, 6)
 
 '''
 Part1:

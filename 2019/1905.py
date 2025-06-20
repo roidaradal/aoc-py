@@ -5,19 +5,23 @@ from aoc import *
 from intcode import *
 
 def data(full: bool) -> list[int]:
-    line = readLines(19, 5, full)[0]
+    line = readFirstLine(19, 5, full)
     return toIntList(line, ',')
 
-def part1():
+def solve() -> Solution:
+    # Part 1
     numbers = data(full=True)
-    runProgram(numbers, 1) 
+    out1 = runProgram(numbers, 1) 
 
-def part2():
+    # Part 2 
     numbers = data(full=True)
-    runProgram(numbers, 5) 
+    out2 = runProgram(numbers, 5) 
 
-def runProgram(numbers: list[int], start: int):
+    return newSolution(out1, out2)
+
+def runProgram(numbers: list[int], start: int) -> int:
     i = 0 
+    output = 0
     while True:
         word = str(numbers[i])
         head, tail = word[:-2], word[-2:]
@@ -45,7 +49,7 @@ def runProgram(numbers: list[int], start: int):
         elif cmd == 4: # Output
             m = modes(head, 1)[0]
             out = param(numbers[i+1], m, numbers)
-            if out != 0: print(out)
+            if out != 0: output = out
             i += 2 
         elif cmd == 5 or cmd == 6: #Jump-if-True/False
             p1, p2 = numbers[i+1], numbers[i+2]
@@ -56,10 +60,10 @@ def runProgram(numbers: list[int], start: int):
                 i = param(p2, m2, numbers)
             else:
                 i += 3
+    return output
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 19, 5)
 
 '''
 RunProgram:

@@ -6,15 +6,16 @@ from aoc import *
 def data(full: bool) -> list[str]:
     return readLines(16, 7, full)
 
-def part1():
+def solve() -> Solution:
     words = data(full=True)
-    count = countValid(words, isValid)
-    print(count)
 
-def part2():
-    words = data(full=True)
-    count = countValid(words, isValid2)
-    print(count)
+    # Part 1 
+    count1 = countValid(words, isValid)
+
+    # Part 2 
+    count2 = countValid(words, isValid2)
+
+    return newSolution(count1, count2)
 
 def isValid(word: str) -> bool:
     found = False
@@ -63,8 +64,7 @@ def toABA(bab: str) -> str:
     return a+b+a
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 16, 7)
 
 '''
 Part1:

@@ -24,7 +24,7 @@ def data(full: bool) -> Problem:
             problem.bots[who] = (low, high)
     return problem
 
-def solve():
+def solve() -> Solution:
     problem = data(full=True)
     chips, bots = problem.chips, problem.bots 
     goal = (17,61)
@@ -34,6 +34,7 @@ def solve():
     for value,who in chips:
         botValues[who].append(value)
 
+    botID = 0
     while True:
         botValues2 = {b: [] for b in bots}
         hasMovement = False
@@ -41,7 +42,8 @@ def solve():
             if len(v) == 2:
                 v = sorted(v)
                 if tuple(v) == goal:
-                    print(b) # print out who is in charge of comparing 17,61
+                    # Part 1
+                    botID = b # remember who is in charge of comparing 17,61
                 for i,(dest,who) in enumerate(bots[b]):
                     if dest == 'bot':
                         botValues2[who].append(v[i])
@@ -53,12 +55,14 @@ def solve():
         botValues = botValues2
         if not hasMovement: break
     
+    # Part 2
     a,b,c = output[0][0], output[1][0], output[2][0]
-    print(a * b * c)
+    product = a * b * c
 
+    return newSolution(botID, product)
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 16, 10)
 
 '''
 Solve:

@@ -6,10 +6,13 @@ from aoc import *
 from intcode import *
 
 def data(full: bool) -> list[int]:
-    line = readLines(19, 7, full)[0]
+    line = readFirstLine(19, 7, full)
     return toIntList(line, ',')
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     numbers = data(full=True)
     N = 5 
     maxOutput = 0
@@ -21,9 +24,9 @@ def part1():
             output, _ = runProgram(numbers[:], inputs, 0)
         if output != None:
             maxOutput = max(maxOutput, output)
-    print(maxOutput)
+    return maxOutput
 
-def part2():
+def part2() -> int:
     numbers = data(full=True)
     N = 5 
     maxOutput = 0 
@@ -44,7 +47,7 @@ def part2():
             if output != None: inputs[p].append(output)
         if outputs[-1] != None:
             maxOutput = max(maxOutput, outputs[-1])
-    print(maxOutput)
+    return maxOutput
 
 def runProgram(numbers: list[int], inputs: list[int], start: int) -> tuple[int|None, int]:
     i = start 
@@ -90,8 +93,7 @@ def runProgram(numbers: list[int], inputs: list[int], start: int) -> tuple[int|N
     return (None,i)
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 19, 7)
 
 '''
 Part1:

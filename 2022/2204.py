@@ -13,15 +13,16 @@ def data(full: bool) -> list[pair]:
         return (p1, p2)
     return [fn(line) for line in readLines(22, 4, full)]
 
-def part1():
+def solve() -> Solution:
     pairs = data(full=True)
-    count = countValid(pairs, isSupersetPair)
-    print(count) 
 
-def part2():
-    pairs = data(full=True)
-    count = countValid(pairs, isOverlappingPair)
-    print(count) 
+    # Part 1
+    count1 = countValid(pairs, isSupersetPair)
+
+    # Part 2
+    count2 = countValid(pairs, isOverlappingPair)
+
+    return newSolution(count1, count2)
 
 def isSupersetPair(p: pair) -> bool:
     r1, r2 = p
@@ -40,8 +41,7 @@ def isOverlappingPair(p: pair) -> bool:
 
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 22, 4)
 
 '''
 Part1:

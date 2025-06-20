@@ -15,20 +15,21 @@ def data(full: bool) -> list[Pair]:
         return head.split(), tail.split()
     return [fn(line) for line in readLines(21, 8, full)]
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     pairs = data(full=True)
     # Length of {1: 2, 4: 4, 7: 3, 8:7}
     fn = lambda p: sum(1 for x in p[1] if len(x) in (2,3,4,7))
-    total = getTotal(pairs, fn)
-    print(total)
+    return getTotal(pairs, fn)
 
-def part2():
+def part2() -> int:
     pairs = data(full=True) 
     m, clues = digitMapClues()
     def fn(pair: Pair) -> int:
-        return solve(pair, m, clues)
-    total = getTotal(pairs, fn)
-    print(total)
+        return solveDigits(pair, m, clues)
+    return getTotal(pairs, fn)
 
 def digitMapClues() -> tuple[Map, Clues]:
     digits = [x  for x in 'abcefg cf acdeg acdfg bcdf abdfg abdefg acf abcdefg abcdfg'.split()]
@@ -54,7 +55,7 @@ def getClues(digits: list[str]) -> Clues:
         length[v].append(k)
     return count, length
 
-def solve(pair: Pair, m: Map, clues: Clues) -> int:
+def solveDigits(pair: Pair, m: Map, clues: Clues) -> int:
     digits, output = pair 
     clues2 = getClues(digits)
     t = alignClues(clues, clues2)
@@ -118,8 +119,7 @@ def translateOutput(output: list[str], m: Map, t: Map) -> int:
     return int(d)
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 21, 8)
 
 '''
 Part1:

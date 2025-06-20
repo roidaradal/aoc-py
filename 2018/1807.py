@@ -32,15 +32,19 @@ def data(full: bool) -> Graph:
             g.edges[node] = []
     return g
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> str:
     g = data(full=True)
     order = []
     for _ in range(len(g.nodes)):
         node = g.nextTask(order)
         order.append(node)
-    print(''.join(order)) 
+    order = ''.join(order) 
+    return order
 
-def part2():
+def part2() -> int:
     g = data(full=True)
     limit = len(g.nodes)
     fixed, workers = 60, 5
@@ -67,14 +71,13 @@ def part2():
             else:
                 queue[i] = (task,left)
         timer += 1
-    print(timer)
+    return timer
 
 def duration(task: str) -> int:
     return ord(task) - 64
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 18, 7)
 
 '''
 Part1:

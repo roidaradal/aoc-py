@@ -4,18 +4,16 @@
 import itertools
 from aoc import *
 
-def data(full: bool) -> tuple[list[coords], dims2]:
+def data(full: bool) -> list[coords]:
     lines = readLines(19, 10, full)
     asteroids = []
-    rows, cols = len(lines), 0
     for row,line in enumerate(lines):
-        cols = len(line)
         for col,char in enumerate(line):
             if char == '#': asteroids.append((row,col))
-    return asteroids, (rows,cols)
+    return asteroids
 
-def solve():
-    asteroids, (rows,cols) = data(full=True)
+def solve() -> Solution:
+    asteroids = data(full=True)
 
     # Part 1
     visible = {a1: {a2: False for a2 in asteroids} for a1 in asteroids}
@@ -60,11 +58,9 @@ def solve():
         score = sum(1 for ok in visible[a].values() if ok)
         scores.append((score, a))
     maxScore, (y,x) = max(scores)
-    print(maxScore)
 
     # Part 2
     station = (y,x)
-
     hrzn = oneRow.get(y, [])
     vert = oneCol.get(x, [])
     diag = sorted((mb[0],pts) for mb,pts in oneLine.items() if station in pts)
@@ -129,7 +125,9 @@ def solve():
             quadrant = 1
 
     y,x = destroyed[goal-1]
-    print((x*100) + y)
+    score = (x*100) + y
+
+    return newSolution(maxScore, score)
 
 def lineEq(a1: coords, a2: coords) -> tuple[float,float]:
     a1, a2 = sortX(a1, a2)
@@ -143,7 +141,7 @@ def sortX(a1: coords, a2: coords) -> tuple[coords, coords]:
     return a1, a2 
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 19, 10)
 
 '''
 Part1:

@@ -9,16 +9,19 @@ def data(full: bool) -> list[int]:
     numbers.append(max(numbers) + 3)
     return numbers 
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     numbers = data(full=True)
     numbers.sort()
     diffs: dict[int,int] = defaultdict(int)
     for i in range(1, len(numbers)):
         d = numbers[i] - numbers[i-1]
         diffs[d] += 1
-    print(diffs[1] * diffs[3])
+    return diffs[1] * diffs[3]
 
-def part2():
+def part2() -> int:
     numbers = data(full=True)
     numbers.sort()
     count =  {numbers[-1] : 1}
@@ -28,11 +31,10 @@ def part2():
         valid = [x for x in numbers[i+1:i+4] if x-curr <= 3]
         count[curr] = sum(count[x] for x in valid)
         i -= 1
-    print(count[numbers[0]])
+    return count[numbers[0]]
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 20, 10)
 
 '''
 Part1:

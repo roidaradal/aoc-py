@@ -10,7 +10,7 @@ def data(full: bool) -> tuple[list[int], list[int]]:
     times, bests = numbers 
     return times, bests
 
-def solve():
+def solve() -> Solution:
     times, bests = data(full=True)
 
     # Part 1
@@ -18,19 +18,19 @@ def solve():
     for i,limit in enumerate(times):
         breakers = sum(1 for d in computeOutcomes(limit) if d > bests[i])
         total *= breakers
-    print(total)
 
     # Part 2
     limit = int(''.join(str(x) for x in times))
     best  = int(''.join(str(x) for x in bests))
     breakers = sum(1 for d in computeOutcomes(limit) if d > best)
-    print(breakers)
+
+    return newSolution(total, breakers)
 
 def computeOutcomes(limit: int) -> list[int]:
     return [hold * (limit-hold) for hold in range(limit+1)]
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 23, 6)
 
 '''
 Solve:

@@ -6,10 +6,11 @@ from aoc import *
 def data(full: bool) -> IntGrid:
     return [toIntLine(line) for line in readLines(22, 8, full)]
 
-def solve():
+def solve() -> Solution:
     grid = data(full=True)
     rows,cols = getBounds(grid)
 
+    # Part 1 and 2
     visible: set[coords] = set()
     maxScore = 0
     for row in range(1,rows-1):
@@ -19,8 +20,7 @@ def solve():
             maxScore = max(maxScore, computeScore(grid, row, col))
     numEdges = (2 * cols) + (2 * (rows-2))
     count = numEdges + len(visible)
-    print(count)
-    print(maxScore)
+    return newSolution(count, maxScore)
 
 def checkRowVisible(grid: IntGrid, visible: set[coords], c: coords):
     if c in visible: return 
@@ -68,7 +68,7 @@ def computeScore(grid: IntGrid, row: int, col: int) -> int:
     return n*e*w*s
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 22, 8)
 
 '''
 Part 1: 

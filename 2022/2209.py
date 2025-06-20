@@ -21,22 +21,25 @@ def data(full: bool) -> list[Step]:
             return (0,0), 0
     return [fn(line) for line in readLines(22, 9, full)]
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     steps = data(full=True)
     head, tail = (0,0), (0,0)
     visited: set[coords] = set([tail])
     for step in steps:
         head, tail = moveRope(head, tail, step, visited)
-    print(len(visited))
+    return len(visited)
 
-def part2():
+def part2() -> int:
     steps = data(full=True)
     tail = 9
     pos = [(0,0) for _ in range(tail+1)]
     visited: set[coords] = set([pos[tail]])
     for step in steps:
         pos = moveChain(pos, step, visited)
-    print(len(visited)) 
+    return len(visited)
 
 def moveRope(head: coords, tail: coords, step: Step, visited: set[coords]) -> tuple[coords, coords]:
     d, count = step 
@@ -78,8 +81,7 @@ def follow(head: coords, tail: coords) -> coords:
     return y2, x2
     
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 22, 9)
 
 '''
 Part1:

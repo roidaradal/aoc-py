@@ -11,25 +11,25 @@ def data(full: bool) -> tuple[list[int], list[int]]:
         col2.append(b)
     return col1, col2
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     col1, col2 = data(full=True)
     col1.sort()
     col2.sort()
     diff = lambda x: abs(x[0]-x[1])
     cols = list(zip(col1,col2))
-    total = getTotal(cols, diff)
-    print(total) 
+    return getTotal(cols, diff)
 
-def part2():
+def part2() -> int:
     col1, col2 = data(full=True)
     freq = countFreq(col2)
     score = lambda x: x * freq[x]
-    total = getTotal(col1, score)
-    print(total)
+    return getTotal(col1, score)
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 24, 1)
 
 '''
 Part1:

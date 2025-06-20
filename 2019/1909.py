@@ -5,23 +5,27 @@ from aoc import *
 from intcode import *
 
 def data(full: bool) -> dict[int,int]:
-    line = readLines(19, 9, full)[0]
+    line = readFirstLine(19, 9, full)
     numbers = toIntList(line, ',')
     memory = defaultdict(int)
     for i,x in enumerate(numbers):
         memory[i] = x 
     return memory
 
-def part1():
+def solve() -> Solution:
+    # Part 1
     numbers = data(full=True)
-    runProgram(numbers, 1) 
+    out1 = runProgram(numbers, 1) 
 
-def part2():
+    # Part 2 
     numbers = data(full=True)
-    runProgram(numbers, 2) 
+    out2 = runProgram(numbers, 2) 
 
-def runProgram(numbers: dict[int, int], start: int):
+    return newSolution(out1, out2)
+
+def runProgram(numbers: dict[int, int], start: int) -> int:
     i, rbase = 0, 0 
+    output = 0
     while True:
         word = str(numbers[i])
         head, tail = word[:-2], word[-2:]
@@ -50,8 +54,7 @@ def runProgram(numbers: dict[int, int], start: int):
             i += 2
         elif cmd == 4: # Output
             m = modes(head, 1)[0]
-            out = param2(numbers[i+1], m, rbase, numbers)
-            print(out)
+            output = param2(numbers[i+1], m, rbase, numbers)
             i += 2 
         elif cmd == 9: # relative base 
             m = modes(head, 1)[0]
@@ -67,10 +70,10 @@ def runProgram(numbers: dict[int, int], start: int):
                 i = param2(p2, m2, rbase, numbers)
             else:
                 i += 3
+    return output
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 19, 9)
 
 '''
 RunProgram:

@@ -6,23 +6,23 @@ from aoc import *
 def data(full: bool) -> list[int]:
     return [int(line) for line in readLines(21, 1, full)]
 
-def part1():
+def solve() -> Solution:
     numbers = data(full=True)
-    fn = lambda i: numbers[i+1] > numbers[i]
-    indexes = list(range(len(numbers)-1))
-    count = countValid(indexes, fn)
-    print(count) 
 
-def part2():
-    numbers = data(full=True) 
-    fn = lambda i: sum(numbers[i-2:i+1]) > sum(numbers[i-3:i])
+    # Part 1
+    fn1 = lambda i: numbers[i+1] > numbers[i]
+    indexes = list(range(len(numbers)-1))
+    count1 = countValid(indexes, fn1)
+
+    # Part 2 
+    fn2 = lambda i: sum(numbers[i-2:i+1]) > sum(numbers[i-3:i])
     indexes = list(range(3, len(numbers)))
-    count = countValid(indexes, fn)
-    print(count) 
+    count2 = countValid(indexes, fn2)
+
+    return newSolution(count1, count2)
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 21, 1)
 
 '''
 Part1:

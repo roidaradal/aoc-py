@@ -5,19 +5,19 @@ import re, json
 from aoc import *
 
 def data(full: bool) -> str:
-    return readLines(15, 12, full)[0]
+    return readFirstLine(15, 12, full)
 
-def solve():
+def solve() -> Solution:
     text = data(full=True)
 
     # Part 1 
-    total = sumNumbers(text)
-    print(total)
+    total1 = sumNumbers(text)
 
     # Part 2
     items = json.loads(text)
-    total = sumItems(items)
-    print(total)
+    total2 = sumItems(items)
+
+    return newSolution(total1, total2)
 
 def sumNumbers(text: str) -> int:
     pattern = r'\-?[0-9]+'
@@ -46,7 +46,7 @@ def sumItems(items: list|dict) -> int:
     return total
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 15, 12)
 
 '''
 Part1:

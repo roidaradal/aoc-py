@@ -23,15 +23,19 @@ def data(full: bool) -> Tree:
             t.children[name].append(child)
     return t
 
-def solve():
+def solve() -> Solution:
     t = data(full=True)
+    
+    # Part 1
     root = [name for name in t.nodes if name not in t.parent][0]
-    print(root) 
 
+    # Part 2
     weight = {}
     q = t.nodes
+    targetWeight = 0
     while len(q) > 0:
         q2 = []
+        stop = False
         for node in q:
             if node not in t.children:  # no children = leaf
                 weight[node] = t.weight[node]   
@@ -48,15 +52,17 @@ def solve():
                     target, heavy = sorted(childWeights)
                     heavyChild = [child for child in t.children[node] if weight[child] == heavy][0]
                     targetWeight = t.weight[heavyChild] - (heavy-target)
-                    print(targetWeight)
-                    return
+                    stop = True 
+                    break
             else: # has child without weight = defer
                 q2.append(node)
         q = q2
-            
+        if stop: break
+    
+    return newSolution(root, targetWeight)
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 17, 7)
 
 '''
 Solve:

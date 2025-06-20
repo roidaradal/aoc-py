@@ -6,7 +6,10 @@ from aoc import *
 def data(full: bool) -> list[str]:
     return readLines(21, 3, full)
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     binaryNumbers = data(full=True)
     count = defaultdict(int)
     for code in binaryNumbers:
@@ -24,13 +27,13 @@ def part1():
             e.append('1')
     g = int(''.join(g), 2)
     e = int(''.join(e), 2)
-    print(g * e)
+    return g * e
 
-def part2():
+def part2() -> int:
     binaryNumbers = data(full=True)
     oxy = filterMax(binaryNumbers)
     co2 = filterMin(binaryNumbers)
-    print(oxy * co2)
+    return oxy * co2
 
 def filterMax(binaryNumbers: list[str]) -> int:
     bitLength = len(binaryNumbers[0])
@@ -56,8 +59,7 @@ def countIndex(binaryNumbers: list[str], index: int) -> int:
     return sum(1 for code in binaryNumbers if code[index] == '1')
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 21, 3)
 
 '''
 Part1:

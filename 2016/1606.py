@@ -6,16 +6,20 @@ from aoc import *
 def data(full: bool) -> list[str]:
     return readLines(16, 6, full)
 
-def solve():
+def solve() -> Solution:
     words = data(full=True)
     freq = columnFrequency(words)
     maxMsg, minMsg = [], []
     for col in range(len(freq)):
         colFreq = [(count,letter) for letter,count in freq[col].items()]
+        # Part 1
         maxMsg.append(max(colFreq)[1])
+        # Part 2
         minMsg.append(min(colFreq)[1])
-    print(''.join(maxMsg))
-    print(''.join(minMsg)) 
+    maxMsg = ''.join(maxMsg)
+    minMsg = ''.join(minMsg)
+
+    return newSolution(maxMsg, minMsg)
 
 def columnFrequency(words: list[str]) -> dict[int,dict[str,int]]:
     _, numCols = getBounds(words)
@@ -26,7 +30,7 @@ def columnFrequency(words: list[str]) -> dict[int,dict[str,int]]:
     return freq
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 16, 6)
 
 '''
 Solve:

@@ -19,7 +19,10 @@ def data(full: bool) -> tuple[list[int], dict[str,Pair]]:
         m[key] = (a,b)
     return moves, m
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     moves, m = data(full=True)
     limit = len(moves)
     count, i = 0, 0
@@ -29,9 +32,9 @@ def part1():
         curr = m[curr][idx]
         count += 1
         i = (i+1) % limit 
-    print(count)
+    return count
 
-def part2():
+def part2() -> int:
     moves, m = data(full=True)
     limit = len(moves)
     starts = [x for x in m if x.endswith('A')]
@@ -44,11 +47,10 @@ def part2():
             count += 1
             i = (i+1) % limit 
         counts.append(count)
-    print(lcm(*counts)) 
+    return lcm(*counts)
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 23, 8)
 
 '''
 Part1:

@@ -7,15 +7,16 @@ from aoc import *
 def data(full: bool) -> list[int]:
     return [int(line) for line in readLines(20, 1, full)]
 
-def part1():
+def solve() -> Solution:
     numbers = data(full=True)
-    value = find2020Combo(numbers, 2) 
-    print(value)
 
-def part2():
-    numbers = data(full=True)
-    value = find2020Combo(numbers, 3) 
-    print(value)
+    # Part 1
+    value1 = find2020Combo(numbers, 2) 
+
+    # Part 2 
+    value2 = find2020Combo(numbers, 3)
+
+    return newSolution(value1, value2)
 
 def find2020Combo(numbers: list[int], count: int) -> int:
     for p in itertools.combinations(numbers, count):
@@ -26,8 +27,7 @@ def find2020Combo(numbers: list[int], count: int) -> int:
     return 0
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 20, 1)
 
 '''
 Find2020Combo:

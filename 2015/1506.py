@@ -22,7 +22,10 @@ def data(mask: dict[str,int], full: bool) -> list[command]:
         return (b, y1, x1, y2+1, x2+1)
     return [fn(line) for line in readLines(15, 6, full)]
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     mask = {on: 1, off: 0, toggle: -1}
     commands = data(mask, full=True)
     side = 1000
@@ -35,9 +38,9 @@ def part1():
                     grid[pt] = not grid[pt]
                 else:
                     grid[pt] = bool(b)
-    print(sum(grid.values()))
+    return sum(grid.values())
 
-def part2():
+def part2() -> int:
     mask = {on: 1, off: -1, toggle: 2}
     commands = data(mask, full=True)
     side = 1000 
@@ -48,11 +51,10 @@ def part2():
                 pt = (y,x)
                 value = grid[pt] + b 
                 grid[pt] = max(value, 0)
-    print(sum(grid.values()))
+    return sum(grid.values())
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 15, 6)
 
 '''
 Part1:

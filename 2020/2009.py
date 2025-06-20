@@ -7,7 +7,7 @@ from aoc import *
 def data(full: bool) -> list[int]:
     return [int(line) for line in readLines(20, 9, full)]
 
-def solve():
+def solve() -> Solution:
     numbers = data(full=True)
     limit = len(numbers)
     
@@ -18,19 +18,24 @@ def solve():
         if not hasPairSum(numbers[i], numbers[i-window:i]):
             target = numbers[i]
             break
-    print(target)
 
     # Part 2
+    part2 = 0
     for i in range(limit):
         j = i 
         total = numbers[i]
+        stop = False
         while total < target:
             j += 1
             total += numbers[j]
             if total == target:
                 seq = sorted(numbers[i:j+1])
-                print(seq[0] + seq[-1])
-                return
+                part2 = seq[0] + seq[-1]
+                stop = True
+                break 
+        if stop: break 
+
+    return newSolution(target, part2)
 
 def hasPairSum(target: int, numbers: list[int]) -> bool:
     for p in itertools.combinations(numbers, 2):
@@ -38,7 +43,7 @@ def hasPairSum(target: int, numbers: list[int]) -> bool:
     return False
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 20, 9)
 
 '''
 Part 1:

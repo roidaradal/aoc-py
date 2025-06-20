@@ -14,15 +14,16 @@ class Password:
 def data(full: bool) -> list[Password]:
     return [Password(line) for line in readLines(20, 2, full)]
 
-def part1():
+def solve() -> Solution:
     passwords = data(full=True)
-    count = countValid(passwords, isValid)
-    print(count) 
 
-def part2():
-    passwords = data(full=True)
-    count = countValid(passwords, isValid2)
-    print(count) 
+    # Part 1
+    count1 = countValid(passwords, isValid)
+
+    # Part 2
+    count2 = countValid(passwords, isValid2)
+
+    return newSolution(count1, count2)
 
 def isValid(p: Password) -> bool:
     freq = charFreq(p.text)
@@ -37,8 +38,7 @@ def isValid2(p: Password) -> bool:
 
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 20, 2)
 
 '''
 Part1:

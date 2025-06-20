@@ -19,15 +19,16 @@ def data(full: bool) -> Config:
             cfg.antenna[char].append((row,col))
     return cfg
 
-def part1():
+def solve() -> Solution:
     cfg = data(full=True)
-    count = countAntiNodes(cfg, extend=False)
-    print(count) 
 
-def part2():
-    cfg = data(full=True)
-    count = countAntiNodes(cfg, extend=True)
-    print(count) 
+    # Part 1
+    count1 = countAntiNodes(cfg, False)
+
+    # Part 2
+    count2 = countAntiNodes(cfg, True)
+
+    return newSolution(count1, count2)
 
 def countAntiNodes(cfg: Config, extend: bool) -> int:
     anti: set[coords] = set()
@@ -50,8 +51,7 @@ def countAntiNodes(cfg: Config, extend: bool) -> int:
     return len(anti)
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 24, 8)
 
 '''
 CountAntiNodes:

@@ -13,21 +13,26 @@ def data(full: bool) -> list[Seat]:
         return (row, col)
     return [fn(line) for line in readLines(20, 5, full)]
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     seats = data(full = True)
     maxID = 0 
     for seat in seats:
         maxID = max(maxID, computeID(seat))
-    print(maxID) 
+    return maxID
 
-def part2():
+def part2() -> int:
     seats = data(full = True)
     ids = [computeID(seat) for seat in seats]
     ids.sort()
+    seatID = 0
     for i in range(1, len(ids)):
         if ids[i] - ids[i-1] > 1:
-            print(ids[i]-1)
+            seatID = ids[i]-1
             break 
+    return seatID
 
 numRows, numCols = 128, 8
 def computeID(seat: Seat) -> int: 
@@ -47,8 +52,7 @@ def binaryMoves(sides: list[int], limit: int) -> int:
     return start if sides[-1] == 0 else end-1
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 20, 5)
 
 '''
 Data:

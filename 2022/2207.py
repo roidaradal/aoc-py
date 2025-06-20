@@ -1,6 +1,7 @@
 # Advent of Code 2022 Day 07
 # John Roy Daradal 
 
+import sys
 from aoc import *
 
 class Item:
@@ -59,28 +60,30 @@ def data(full: bool) -> FileSystem:
         fs[path].computeSize()
     return fs
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     fs = data(full=True)
     def totalSize(item: Item) -> int:
         if item.isDir and item.size <= 100_000:
             return item.size
         return 0
     items = [i for i in fs.values()] 
-    total = getTotal(items, totalSize)
-    print(total)
+    return getTotal(items, totalSize)
 
-def part2():
+def part2() -> int:
     fs = data(full=True) 
     total = 70_000_000
     required = 30_000_000 
     free = total - fs['/'].size 
     minimum = required - free 
 
-    minSize = float('inf')
+    minSize = sys.maxsize
     for item in fs.values():
         if item.isDir and item.size >= minimum:
             minSize = min(minSize, item.size)
-    print(minSize)
+    return minSize
 
 def getDir(fs: FileSystem, name: str, parent: Item|None) -> tuple[Item, bool]:
     path = name if parent is None else parent.path + name + pathGlue 
@@ -104,8 +107,7 @@ def getFile(fs: FileSystem, name: str, size: int, parent: Item|None) -> tuple[It
     return item, True
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 22, 7)
 
 '''
 Part1:

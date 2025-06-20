@@ -13,8 +13,10 @@ def data(full: bool) -> list[strInt]:
         return cmd, value
     return [fn(line) for line in readLines(22, 10, full)]
 
-def solve():
+def solve() -> Solution:
     commands = data(full=True)
+    
+    # Part 1
     interest = (20, 60, 100, 140, 180, 220)
     crt = createCRT()
     x, t, total = 1, 0, 0
@@ -26,8 +28,10 @@ def solve():
             if t in interest:
                 total += t * x 
         x += param 
-    print(total)
+    # Part 2
     displayCRT(crt)
+
+    return newSolution(total, "")
 
 rows, cols = 6, 40 
 def createCRT() -> CRT:
@@ -48,7 +52,7 @@ def drawPixel(crt: CRT, t: int, x: int):
     crt[row][col] = pixel
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 22, 10)
 
 '''
 Part1:

@@ -7,17 +7,18 @@ from aoc import *
 def data(full: bool) -> list[str]:
     return readLines(15, 8, full)
 
-def part1():
+def solve() -> Solution:
     words = data(full=True)
-    fn = lambda text: len(text) - len(parseString(text))
-    total = getTotal(words, fn)
-    print(total)
 
-def part2():
-    words = data(full=True)
-    fn = lambda text: len(expandString(text)) - len(text)
-    total = getTotal(words, fn)
-    print(total) 
+    # Part 1
+    fn1 = lambda text: len(text) - len(parseString(text))
+    total1 = getTotal(words, fn1)
+
+    # Part 2
+    fn2 = lambda text: len(expandString(text)) - len(text)
+    total2 = getTotal(words, fn2)
+
+    return newSolution(total1, total2)
 
 hex = r'\\x[0-9a-f]{2}'
 def parseString(text: str) -> str:
@@ -39,8 +40,7 @@ def expandString(text: str) -> str:
     return '"%s"' % ''.join(chars)
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 15, 8)
 
 '''
 Part1:

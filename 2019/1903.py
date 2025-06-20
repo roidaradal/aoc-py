@@ -9,17 +9,17 @@ def data(full: bool) -> list[list[strInt]]:
     fn = lambda line: [toStrInt(x, 1) for x in line.split(',')]
     return [fn(line) for line in readLines(19, 3, full)]
 
-def part1():
+def solve() -> Solution:
     wires = data(full=True)
     cross = crossingPoints(wires)
-    closest = min(manhattan(c) for c in cross)
-    print(closest) 
 
-def part2():
-    wires = data(full=True)
-    cross = crossingPoints(wires)
-    closest = min(cross.values())
-    print(closest)
+    # Part 1
+    closest1 = min(manhattan(c) for c in cross)
+    
+    # Part 2 
+    closest2 = min(cross.values())
+
+    return newSolution(closest1, closest2)
 
 def wire(moves: list[strInt]) -> dict[coords,int]:
     visited = {}
@@ -44,10 +44,8 @@ def crossingPoints(wires: list[list[strInt]]) -> dict[coords,int]:
     cross = {c: sum(s) for c,s in steps.items() if len(s) > 1}
     return cross
 
-
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 19, 3)
 
 '''
 Part1:

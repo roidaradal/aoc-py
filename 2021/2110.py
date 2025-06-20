@@ -6,7 +6,10 @@ from aoc import *
 def data(full: bool) -> list[str]:
     return readLines(21, 10, full)
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     lines = data(full=True)
     score = {
         ')' : 3,
@@ -17,10 +20,9 @@ def part1():
     def illegalScore(line: str) -> int:
         illegal = findIllegal(line)
         return 0 if illegal is None else score[illegal]
-    total = getTotal(lines, illegalScore)
-    print(total)
+    return getTotal(lines, illegalScore)
 
-def part2():
+def part2() -> int:
     lines = data(full=True) 
     score = {
         ')' : 1,
@@ -35,7 +37,7 @@ def part2():
             scores.append(computeScore(incomplete, score))
     scores.sort()
     mid = len(scores) // 2 
-    print(scores[mid])
+    return scores[mid]
 
 closer = {
     ')' : '(',
@@ -81,8 +83,7 @@ def computeScore(text: str, score: dict[str,int]) -> int:
     return total
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 21, 10)
 
 '''
 Part1:

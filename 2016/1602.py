@@ -8,31 +8,34 @@ T: dict[str,delta] = {'U': U, 'D': D, 'L': L, 'R': R}
 def data(full: bool) -> list[str]:
     return readLines(16, 2, full)
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> str:
     cfg = Config()
     cfg.pad = ['123','456','789']
     cfg.start = (1,1)
-    cfg.boundsCheck = lambda c: insideBounds(c, (3,3))
+    cfg.bounds = (3, 3)
     
     movesList = data(full=True)
     code = solveCode(cfg, movesList)
-    print(code)
+    return code
 
-def part2():
+def part2() -> str:
     cfg = Config()
     cfg.pad = ['00100','02340','56789','0ABC0','00D00']
     cfg.start = (2,0)
-    cfg.boundsCheck = lambda c: insideBounds(c, (5,5)) and cfg.pad[c[0]][c[1]] != '0'
+    cfg.bounds = (5, 5)
 
     movesList = data(full=True)
     code = solveCode(cfg, movesList)
-    print(code)
+    return code
 
 class Config:
     def __init__(self):
         self.pad: list[str] = []
         self.start: coords = (0,0)
-        self.boundsCheck: Callable = lambda: False
+        self.bounds: dims2 = (0,0)
 
 def solveCode(cfg: Config, movesList: list[str]) -> str:
     code = []
@@ -40,7 +43,8 @@ def solveCode(cfg: Config, movesList: list[str]) -> str:
     for moves in movesList:
         for m in moves:
             nxt = move(curr, T[m])
-            if cfg.boundsCheck(nxt):
+            r, c = nxt
+            if insideBounds(nxt, cfg.bounds) and cfg.pad[r][c] != '0':
                 curr = nxt 
         row,col = curr 
         code.append(cfg.pad[row][col])
@@ -48,8 +52,7 @@ def solveCode(cfg: Config, movesList: list[str]) -> str:
 
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 16, 2)
 
 '''
 Part1:

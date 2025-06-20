@@ -32,15 +32,16 @@ def data(full: bool) -> list[Game]:
 
     return [fn(line) for line in readLines(23, 2, full)]
 
-def part1():
+def solve() -> Solution:
     games = data(full=True)
-    total = getTotal(games, validID) 
-    print(total)
 
-def part2():
-    games = data(full=True)
-    total = getTotal(games, gamePower)
-    print(total)
+    # Part 1
+    total1 = getTotal(games, validID) 
+
+    # Part 2
+    total2 = getTotal(games, gamePower)
+
+    return newSolution(total1, total2)
 
 def validID(game: Game) -> int:
     isValid = True 
@@ -58,8 +59,7 @@ def gamePower(game: Game) -> int:
     return maxR * maxG * maxB
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 23, 2)
 
 '''
 Part1:

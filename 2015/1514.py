@@ -21,7 +21,7 @@ def data(full: bool) -> list[Reindeer]:
         return Reindeer(p[0], int(p[3]), int(p[6]), int(p[-2]))
     return [fn(line) for line in readLines(15, 14, full)]
 
-def solve():
+def solve() -> Solution:
     reindeers = data(full=True)
     score = {r.name : 0 for r in reindeers}
     for _ in range(2503):
@@ -34,11 +34,11 @@ def solve():
     
     # Part 1
     maxTotal = max(r.total for r in reindeers)
-    print(maxTotal)
 
     # Part 2 
     maxScore = max(score.values())
-    print(maxScore)
+
+    return newSolution(maxTotal, maxScore)
 
 def tick(r: Reindeer):
     if r.isFlying:
@@ -54,7 +54,7 @@ def tick(r: Reindeer):
             r.restLeft = r.restTime
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 15, 14)
 
 '''
 Part1:

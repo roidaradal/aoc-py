@@ -9,20 +9,23 @@ def data(full: bool) -> list[strInt]:
         return p[0], int(p[1])
     return [fn(line) for line in readLines(20, 8, full)]
 
-def part1():
+def solve() -> Solution:
     codes = data(full=True) 
-    value, _ = runCodes(codes)
-    print(value)
 
-def part2():
-    codes = data(full=True)
-    for i,(cmd,_) in enumerate(codes):
+    # Part 1
+    value1, _ = runCodes(codes)
+
+    # Part 2
+    value2 = 0
+    for i, (cmd,_) in enumerate(codes):
         if cmd == 'acc': continue # skip, not corrupted
         codes2 = flipNopJmp(codes, i)
         value, stuck = runCodes(codes2)
         if not stuck:
-            print(value)
-            return 
+            value2 = value 
+            break 
+    
+    return newSolution(value1, value2)
 
 def runCodes(codes: list[strInt]) -> tuple[int, bool]:
     i, x = 0, 0 
@@ -52,8 +55,7 @@ def flipNopJmp(codes: list[strInt], idx: int) -> list[strInt]:
     return codes2
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 20, 8)
 
 '''
 Part1:

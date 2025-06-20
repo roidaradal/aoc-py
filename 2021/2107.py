@@ -1,34 +1,37 @@
 # Advent of Code 2021 Day 07
 # John Roy Daradal 
 
+import sys
 from aoc import *
 
 def data(full: bool) -> list[int]:
-    line = readLines(21, 7, full)[0]
+    line = readFirstLine(21, 7, full)
     return toIntList(line, ',')
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     numbers = data(full=True)
     numbers.sort()
     median = numbers[len(numbers)//2]
     total = sum(abs(median-x) for x in numbers)
-    print(total)
+    return total
 
-def part2():
+def part2() -> int:
     numbers = data(full=True)
     start, end = min(numbers), max(numbers)
-    minCost = float('inf')
+    minCost = sys.maxsize
     for target in range(start, end+1):
         total = sum(sumRange(abs(target-x)) for x in numbers)
         minCost = min(minCost, total)
-    print(minCost) 
+    return minCost
     
 def sumRange(x: int) -> int:
     return sum(range(x+1))
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 21, 7)
 
 '''
 Part1:

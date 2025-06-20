@@ -15,7 +15,10 @@ def data(full: bool) -> list[claim]:
         return (cid, (row,col), (h,w))
     return [fn(line) for line in readLines(18, 3, full)]
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     claims = data(full=True)
     g = createGrid(0, 1000, 1000) 
     for _,start,dims in claims:
@@ -26,9 +29,9 @@ def part1():
                 c = col+dx 
                 g[r][c] += 1
     count = sum(sum(1 for x in line if x > 1) for line in g)
-    print(count)
+    return count
 
-def part2():
+def part2() -> int:
     claims = data(full=True)
     g = createGrid(0, 1000, 1000)
     clean = {}
@@ -48,11 +51,11 @@ def part2():
         if ok:
             clean[cid] = True 
     
-    for k in clean: print(k)
+    claimID = list(clean.keys())[0]
+    return claimID
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 18, 3)
 
 '''
 Part1:

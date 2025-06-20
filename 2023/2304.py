@@ -14,15 +14,16 @@ def data(full: bool) -> list[Game]:
         return (set(winners), set(numbers))
     return [fn(line) for line in readLines(23, 4, full)]
 
-def part1():
+def solve() -> Solution:
     games = data(full=True) 
-    total = getTotal(games, score)
-    print(total)
 
-def part2():
-    games = data(full=True)
-    total = countTotalCards(games)
-    print(total) 
+    # Part 1
+    total1 = getTotal(games, score)
+
+    # Part 2
+    total2 = countTotalCards(games)
+
+    return newSolution(total1, total2)
 
 def score(game: Game) -> int:
     winners, numbers = game 
@@ -42,8 +43,7 @@ def countTotalCards(games: list[Game]) -> int:
     return sum(count.values())
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 23, 4)
 
 '''
 Part1:

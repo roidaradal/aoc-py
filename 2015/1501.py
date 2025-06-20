@@ -3,36 +3,30 @@
 
 from aoc import * 
 
-T: dict[str,int] = {
-    '(' : 1,
-    ')' : -1,
-}
-
 def data(full: bool) -> str:
-    return readLines(15, 1, full)[0]
+    return readFirstLine(15, 1, full)
 
-def part1():
+def solve() -> Solution:
     line = data(full=True)
-    level = process(line, None)
-    print(level)
 
-def part2():
-    line = data(full=True)
-    level = process(line, -1)
-    print(level)
+    # Part 1
+    level1 = process(line, None)
+
+    # Part 2
+    level2 = process(line, -1)
+
+    return newSolution(level1, level2)
 
 def process(line: str, goal: int|None) -> int:
     level = 0
     for i,x in enumerate(line):
-        level += T[x]
+        level += 1 if x == '(' else -1
         if level == goal:
             return i+1
     return level
 
-
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 15, 1)
 
 '''
 Part1:

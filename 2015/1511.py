@@ -4,18 +4,18 @@
 from aoc import *
 
 def data(full: bool) -> str:
-    return readLines(15, 11, full)[0]
+    return readFirstLine(15, 11, full)
 
-def solve():
+def solve() -> Solution:
     password = data(full=True)
     
     # Part 1 
-    password = nextValidPassword(password)
-    print(password)
+    password1 = nextValidPassword(password)
 
     # Part 2 
-    password = nextValidPassword(password)
-    print(password)
+    password2 = nextValidPassword(password1)
+
+    return newSolution(password1, password2)
 
 def nextValidPassword(password: str) -> str:
     while True:
@@ -74,7 +74,7 @@ def isValidPassword(password: str) -> bool:
     return True
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 15, 11)
 
 '''
 Solve:

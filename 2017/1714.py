@@ -7,16 +7,18 @@ from functools import reduce
 from operator import xor
 
 def data(full: bool) -> str:
-    return readLines(17, 14, full)[0]
+    return readFirstLine(17, 14, full)
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     key = data(full=True)
     totalBits = lambda i: sum(getBits(key, i))
     indexes = list(range(128))
-    total = getTotal(indexes, totalBits)
-    print(total)
+    return getTotal(indexes, totalBits)
 
-def part2():
+def part2() -> int:
     key = data(full=True)
     grid: list[list[int]] = []
     for i in range(128):
@@ -32,7 +34,7 @@ def part2():
             for pt in points:
                 group[pt] = groupID 
             groupID += 1
-    print(groupID)
+    return groupID
 
 def getBits(key: str, x: int) -> list[int]:
     fkey = '%s-%d' % (key, x)
@@ -69,8 +71,7 @@ def floodFill(grid: list[list[int]], start: coords) -> set[coords]:
     return points
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 17, 14)
 
 '''
 Part1:

@@ -4,31 +4,31 @@
 from aoc import * 
 
 def data(full: bool) -> str:
-    return readLines(17, 1, full)[0]
+    return readFirstLine(17, 1, full)
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     word = data(full=True)
     wordLen = len(word)
     def fn(i: int) -> int:
         j = (i+1) % wordLen 
         return int(word[i]) if word[i] == word[j] else 0
     numbers = list(range(wordLen))
-    total = getTotal(numbers, fn)
-    print(total) 
+    return getTotal(numbers, fn)
 
-def part2():
+def part2() -> int:
     word = data(full=True)
     mid = len(word) // 2 
     def fn(i: int) -> int:
         j = mid+i 
         return 2 * int(word[i]) if word[i] == word[j] else 0 
     numbers = list(range(mid))
-    total = getTotal(numbers, fn)
-    print(total)
+    return getTotal(numbers, fn)
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 17, 1)
 
 '''
 Part1:

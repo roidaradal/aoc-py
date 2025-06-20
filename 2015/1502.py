@@ -7,29 +7,29 @@ def data(full: bool) -> list[dims3]:
     fn = lambda line: toDims3(line, 'x')
     return [fn(line) for line in readLines(15, 2, full)]
 
-def part1():
-    def fn(dims: dims3) -> int:
-        l,w,h = dims 
-        lw, wh, lh = l*w, w*h, l*h 
-        return (2*lw) + (2*wh) + (2*lh) + min(lw,wh,lh)
-    
+def solve() -> Solution:
     items = data(full=True)
-    total = getTotal(items, fn)
-    print(total)
+    
+    # Part 1
+    total1 = getTotal(items, fn1)
 
-def part2():
-    def fn(dims: dims3) -> int:
-        d1, d2, d3 = sorted(dims) 
-        return (2 * (d1+d2)) + (d1*d2*d3)
-    
-    items = data(full=True)
-    total = getTotal(items, fn)
-    print(total)
+    # Part 2
+    total2 = getTotal(items, fn2)
+
+    return newSolution(total1, total2)
+
+def fn1(dims: dims3) -> int:
+    l,w,h = dims 
+    lw, wh, lh = l*w, w*h, l*h 
+    return (2*lw) + (2*wh) + (2*lh) + min(lw,wh,lh)
+
+def fn2(dims: dims3) -> int:
+    d1, d2, d3 = sorted(dims) 
+    return (2 * (d1+d2)) + (d1*d2*d3)
 
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 15, 2)
 
 '''
 Part1:

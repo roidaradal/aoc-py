@@ -6,7 +6,7 @@ from aoc import *
 dims = (6,25)
 
 def data(full: bool) -> list[str]:
-    line = readLines(19, 8, full)[0]
+    line = readFirstLine(19, 8, full)
     h,w = dims 
     layer = h*w
     img = []
@@ -14,15 +14,16 @@ def data(full: bool) -> list[str]:
         img.append(line[i:i+layer])
     return img
 
-def part1():
+def solve() -> Solution:
     layers = data(full=True)
+
+    # Part 1
     freq = {i: charFreq(layer) for i,layer in enumerate(layers)}
     min0 = min((f['0'],i) for i,f in freq.items())[1]
     f = freq[min0]
-    print(f['1'] * f['2'])
+    part1 = f['1'] * f['2']
 
-def part2():
-    layers = data(full=True)
+    # Part 2
     h,w = dims 
     img = []
     for i in range(h*w):
@@ -36,9 +37,10 @@ def part2():
         row = [T[x] for x in img[i:i+w]]
         print(''.join(row)) 
 
+    return newSolution(part1, "")
+
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 19, 8)
 
 '''
 Part1:

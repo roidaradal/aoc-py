@@ -3,32 +3,35 @@
 
 from aoc import * 
 
-T: dict[str, delta] = {
-    '>' : R,
-    '<' : L,
-    '^' : U,
-    'v' : D,
-}
-
 def data(full: bool) -> list[delta]:
-    line = readLines(15, 3, full)[0]
+    T: dict[str, delta] = {
+        '>' : R,
+        '<' : L,
+        '^' : U,
+        'v' : D,
+    }
+    line = readFirstLine(15, 3, full)
     return [T[x] for x in line]
 
-def part1():
+def solve() -> Solution:
     moves = data(full=True)
-    visited = walk(moves)
-    print(len(visited))
 
-def part2():
-    moves = data(full=True)
+    # Part 1
+    visited = walk(moves)
+    count1 = len(visited)
+
+    # Part 2
     m = len(moves)
     v1 = walk(moves[0:m-1:2])  # Santa = Even
     v2 = walk(moves[1:m:2])    # Robo  = Odd
-    print(len(v1.union(v2)))
+    count2 = len(v1.union(v2))
 
-def walk(moves: list[delta], start: coords = (0,0),  visitStart: bool = True) -> set[coords]:
-    visited = set()
-    if visitStart: visited.add(start)
+    return newSolution(count1, count2)
+
+def walk(moves: list[delta]) -> set[coords]:
+    start = (0,0)
+    visited: set[coords]= set()
+    visited.add(start)
     curr = start
     for d in moves:
         curr = move(curr, d)
@@ -36,8 +39,7 @@ def walk(moves: list[delta], start: coords = (0,0),  visitStart: bool = True) ->
     return visited
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 15, 3)
 
 '''
 Data:

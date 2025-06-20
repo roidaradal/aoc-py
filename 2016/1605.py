@@ -4,22 +4,28 @@
 from aoc import * 
 
 def data(full: bool) -> str:
-    return readLines(16, 5, full)[0]
+    return readFirstLine(16, 5, full)
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+pwdLength = 8 
+
+def part1() -> str:
     door = data(full=True)
     hashGen = md5HashGenerator(door, '00000', 0)
-    pwd = []
-    for _ in range(8):
+    pwd = ['.'] * pwdLength
+    for i in range(pwdLength):
         _, hash = next(hashGen)
-        pwd.append(hash[5])
-    print(''.join(pwd))
+        pwd[i] = hash[5]
+        print(''.join(pwd))
+    return ''.join(pwd)
 
 def part2():
     door = data(full=True)
     hashGen = md5HashGenerator(door, '00000', 0)
-    indexes = [str(x) for x in range(8)]
-    pwd = ['.'] * 8 
+    indexes = [str(x) for x in range(pwdLength)]
+    pwd = ['.'] * pwdLength 
     while any(p == '.' for p in pwd): 
         _, hash = next(hashGen)
         if hash[5] not in indexes: continue
@@ -27,10 +33,10 @@ def part2():
         if pwd[idx] == '.':
             pwd[idx] = hash[6]
             print(''.join(pwd))
+    return ''.join(pwd)
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 16, 5)
 
 '''
 Part1:

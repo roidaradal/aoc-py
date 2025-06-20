@@ -12,16 +12,18 @@ def data(full: bool) -> list[Config]:
         return int(head), numbers
     return [fn(line) for line in readLines(24, 7, full)]
 
-def solve():
+def solve() -> Solution:
     configs = data(full=True)
 
+    # Part 1
     score1 = scoreFn(useConcat=False)
-    total = getTotal(configs, score1)
-    print(total)
+    total1 = getTotal(configs, score1)
 
+    # Part 2
     score2 = scoreFn(useConcat=True)
-    total = getTotal(configs, score2)
-    print(total) 
+    total2 = getTotal(configs, score2)
+
+    return newSolution(total1, total2)
 
 def scoreFn(useConcat: bool) -> Callable:
     def scoreOf(cfg: Config) -> int:
@@ -41,7 +43,7 @@ def isPossible(goal: int, numbers: list[int], useConcat: bool) -> bool:
     return goal in q
 
 if __name__ == '__main__':
-    do(solve)
+    do(solve, 24, 7)
 
 '''
 Solve:

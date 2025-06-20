@@ -6,7 +6,10 @@ from aoc import *
 def data(full: bool) -> list[str]:
     return readLines(24, 4, full)
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     grid = data(full=True)
     # Find starting X
     points = [(r,c) for r,line in enumerate(grid) for c,char in enumerate(line) if char == 'X']
@@ -22,9 +25,9 @@ def part1():
     # Complete A, S
     for letter in 'AS':
         vectors = findNextPositions(grid, vectors, letter)
-    print(len(vectors))
+    return len(vectors)
 
-def part2():
+def part2() -> int:
     grid = data(full=True)
     # Find middle A
     rows,cols = getBounds(grid)
@@ -46,7 +49,7 @@ def part2():
         rdiag = tr + 'A' + bl 
         if isXMAS(ldiag, rdiag): 
             xmas.append((row,col))
-    print(len(xmas))
+    return len(xmas)
      
 def findNextPositions(grid: list[str], vectors: list[vector], letter: str) -> list[vector]:
     bounds = getBounds(grid)
@@ -63,8 +66,7 @@ def isXMAS(diag1: str, diag2: str) -> bool:
     return all(d in ('MAS','SAM') for d in (diag1, diag2))
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 24, 4)
 
 '''
 Part1:

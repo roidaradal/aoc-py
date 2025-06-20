@@ -7,15 +7,16 @@ def data(full: bool) -> list[list[int]]:
     fn = lambda line: toIntList(line, None)
     return [fn(line) for line in readLines(24, 2, full)]
 
-def part1():
+def solve() -> Solution:
     numbersList = data(full=True)
-    count = countValid(numbersList, isSafe)
-    print(count) 
 
-def part2():
-    numbersList = data(full=True)
-    count = countValid(numbersList, isSafe2)
-    print(count) 
+    # Part 1
+    count1 = countValid(numbersList, isSafe)
+
+    # Part 2 
+    count2 = countValid(numbersList, isSafe2)
+
+    return newSolution(count1, count2)
 
 def isSafe(numbers: list[int]) -> bool:
     diffs = [numbers[i]-numbers[i-1] for i in range(1, len(numbers))]
@@ -35,8 +36,7 @@ def isSafe2(numbers: list[int]) -> bool:
     return False
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 24, 2)
 
 '''
 Part1:

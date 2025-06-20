@@ -56,12 +56,15 @@ def data(full: bool) -> Grid:
     grid.createEdges()
     return grid
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     grid = data(full=True)
     maxDistance = bfsMaxDistance(grid)
-    print(maxDistance) 
+    return maxDistance 
 
-def part2():
+def part2() -> int:
     grid = data(full=True)
     points = dfsVisit(grid)
     polygon = Polygon(points)
@@ -74,7 +77,7 @@ def part2():
             point = Point(*c)
             if polygon.contains(point):
                 count += 1
-    print(count) 
+    return count 
 
 def bfsMaxDistance(grid: Grid) -> int:
     dist: dict[coords, int] = {}
@@ -105,8 +108,7 @@ def dfsVisit(grid: Grid) -> list[coords]:
     return points
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 23, 10)
 
 '''
 CreateGrid: 

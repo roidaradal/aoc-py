@@ -4,25 +4,27 @@
 from aoc import * 
 
 def data(full: bool) -> str:
-    return readLines(15, 4, full)[0]
+    return readFirstLine(15, 4, full)
 
-def part1():
+def solve() -> Solution:
     key = data(full=True)
-    solve(key, 5)
 
-def part2():
-    key = data(full=True)
-    solve(key, 6)
+    # Part 1
+    idx1 = findIndex(key, 5)
 
-def solve(key: str, numZeros: int):
+    # Part 2
+    idx2 = findIndex(key, 6)
+
+    return newSolution(idx1, idx2)
+
+def findIndex(key: str, numZeros: int) -> int:
     goal = '0' * numZeros 
     hashGen = md5HashGenerator(key, goal, 1)
     i,_ = next(hashGen)
-    print(i)
+    return i
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 15, 4)
 
 '''
 Solve:

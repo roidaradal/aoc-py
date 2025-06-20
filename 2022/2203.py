@@ -6,16 +6,17 @@ from aoc import *
 def data(full: bool) -> list[str]:
     return readLines(22, 3, full)
 
-def part1():
+def solve() -> Solution:
     words = data(full=True)
-    total = getTotal(words, commonScore) 
-    print(total)
+    
+    # Part 1
+    total1 = getTotal(words, commonScore) 
 
-def part2():
-    words = data(full=True)
+    # Part 2
     groups = [words[i:i+3] for i in range(0, len(words), 3)]
-    total = getTotal(groups, badgeScore)
-    print(total) 
+    total2 = getTotal(groups, badgeScore)
+
+    return newSolution(total1, total2)
 
 def score(char: str) -> int:
     v = ord(char)
@@ -48,8 +49,7 @@ def badgeScore(words: list[str]) -> int:
     
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 22, 3)
 
 '''
 Part1:

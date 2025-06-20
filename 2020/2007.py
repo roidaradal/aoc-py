@@ -15,7 +15,10 @@ def data(full: bool) -> Hierarchy:
         h[color] = [bagCount(b) for b in bags]
     return h
 
-def part1():
+def solve() -> Solution:
+    return newSolution(part1(), part2())
+
+def part1() -> int:
     h = data(full=True)
     parents: dict[str,list[str]] = defaultdict(list)
     for parentColor, bagCounts in h.items():
@@ -28,12 +31,12 @@ def part1():
         valid.add(color)
         nxt = parents[color]
         if len(nxt) > 0: q.extend(nxt)
-    print(len(valid))
+    return len(valid)
 
-def part2():
+def part2() -> int:
     h = data(full=True)
     count = countInside('shiny gold', h)
-    print(count) 
+    return count
 
 def bagCount(text: str) -> strInt:
     p = text.split()
@@ -49,8 +52,7 @@ def countInside(color: str, h: Hierarchy) -> int:
     return total
 
 if __name__ == '__main__':
-    do(part1)
-    do(part2)
+    do(solve, 20, 7)
 
 '''
 Part1:
