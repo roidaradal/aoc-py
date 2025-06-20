@@ -129,6 +129,14 @@ def tryParseInt(x: str) -> int|str:
         return y
     except ValueError:
         return x
+    
+def cmp(a: int, b: int) -> int:
+    if a < b:
+        return -1
+    elif a > b:
+        return 1 
+    else:
+        return 0
 
 #####################################################################################
 
