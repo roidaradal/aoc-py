@@ -14,7 +14,12 @@ def data(full: bool) -> dict[int,int]:
 
 def solve() -> Solution:
     numbers = data(full=True)
-    grid, goal = runProgram(numbers) 
+    grid, goal = runProgram(numbers, {}) 
+
+    # Run again to explore the unexplored parts
+    numbers = data(full=True)
+    grid, goal = runProgram(numbers, grid)
+    # displayGrid(grid, (0,0), goal, {})
 
     # Part 1 
     steps1 = bfsExploration(grid, (0,0), goal, display=False)
@@ -36,11 +41,12 @@ def nextMove(curr: coords, grid: dict[coords,int]) -> tuple[int, coords]:
     _, _, moveCode, nxt = min(options)
     return moveCode, nxt
 
-def runProgram(numbers: dict[int, int]) -> tuple[dict[coords,int], coords]:
+def runProgram(numbers: dict[int, int], grid: dict[coords,int]) -> tuple[dict[coords,int], coords]:
+    # Note: grid: -1 for wall, last visited for blank space
     i, rbase = 0, 0 
     curr: coords = (0,0)
     nxt: coords = (0,0)
-    grid: dict[coords,int] = {} # -1 for wall, last visited for free
+    moveCode = 0
     grid[curr] = 0
     steps = 0
     while True:
@@ -118,11 +124,11 @@ def displayGrid(grid: dict[coords,int], curr: coords, goal: coords|None, visited
             elif pt == curr:
                 pixel = 'O'
             elif pt == goal:
-                pixel = 'X'
+                pixel = 'G'
             elif pt in visited:
-                pixel = '.'
+                pixel = 'x'
             elif pt not in grid:
-                pixel = '?'
+                pixel = '.'
             elif pt in grid and grid[pt] < 0:
                 pixel = '#'
             row.append(pixel)
@@ -152,6 +158,7 @@ if __name__ == '__main__':
 '''
 Solve: 
 - Run the program to explore the grid and find the coords of the oxygen system 
+- Edit: Run the program a 2nd time to explore the unexplored grid parts (since unexplored is prioritized)
 - For Part 1, use BFS to find shortest path from (0,0) to the goal (oxygen), navigating the grid 
 - For Part 2, use BFS to explore the grid with no goal (find all reachable), starting from oxygen position:
   this models the spread of the oxygen per minute; return the maximum no. of steps in the exploration
