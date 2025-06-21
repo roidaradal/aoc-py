@@ -65,7 +65,7 @@ def countAdjacentTaken(grid: Grid, c: coords) -> int:
 
 def countVisibleTaken(grid: Grid, c: coords) -> int:
     bounds = getBounds(grid)
-    deltas = [U, D, L, R, (-1,-1), (-1, 1), (1,-1), (1,1)]
+    deltas = [U, D, L, R, NE, NW, SE, SW]
     taken = 0
     for d in deltas: 
         y,x = c 

@@ -144,9 +144,20 @@ U: delta = (-1,0)
 D: delta = (1,0)
 L: delta = (0,-1)
 R: delta = (0,1)
+X: delta = (0,0)
+NW: delta = (-1,-1)
+NE: delta = (-1,1)
+SW: delta = (1,-1)
+SE: delta = (1,1)
 
-leftOf:  dict[delta,delta] = {U: L, L: D, D: R, R: U}
-rightOf: dict[delta,delta] = {U: R, R: D, D: L, L: U}
+leftOf:  dict[delta,delta] = {
+    U: L, L: D, D: R, R: U, X: X,
+    NE: NW, NW: SW, SW: SE, SE: NE,
+}
+rightOf: dict[delta,delta] = {
+    U: R, R: D, D: L, L: U, X: X,
+    NE: SE, SE: SW, SW: NW, NW: NE,
+}
 
 def createGrid(initial: Any, numRows: int, numCols: int) -> list[list]:
     return [[initial for _ in range(numCols)] for _ in range(numRows)]
@@ -157,6 +168,10 @@ def getBounds(grid: list) -> dims2:
 def move(c: coords, d: delta) -> coords:
     (row,col),(dy,dx) = c, d
     return (row+dy, col+dx)
+
+def repeatMove(c: coords, d: delta, r: int) -> coords:
+    for _ in range(r): c = move(c, d)
+    return c
 
 def getDelta(c1: coords, c2: coords) -> delta:
     (y1,x1), (y2,x2) = c1, c2 
