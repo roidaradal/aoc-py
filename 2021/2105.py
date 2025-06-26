@@ -58,7 +58,7 @@ def addDiagonal(g: list[list[int]], x1: int, y1: int, x2: int, y2: int):
     if y1 < y2:
         ys = list(range(y1,y2+1))    # forward 
     else:
-        ys = list(range(y1,2-1,-1))  # backward
+        ys = list(range(y1,y2-1,-1))  # backward
     for i in range(len(xs)):
         y, x = ys[i], xs[i]
         g[y][x] += 1

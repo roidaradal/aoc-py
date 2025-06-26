@@ -50,12 +50,12 @@ def data(full: bool) -> tuple[list[int], list[Bingo]]:
     return (numbers, cards)
 
 def solve() -> Solution:
-    numbers, cards = data(full = True)
-
     # Part 1
+    numbers, cards = data(full = True)
     score1 = playBingo(numbers, cards, 1)
 
     # Part 2 
+    numbers, cards = data(full = True)
     score2 = playBingo(numbers, cards, len(cards))
 
     return newSolution(score1, score2)
