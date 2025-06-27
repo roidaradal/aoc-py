@@ -31,6 +31,10 @@ def toInt2(line: str, sep: str|None) -> int2:
     a,b = [int(x.strip()) for x in line.split(sep)]
     return (a,b)
 
+def toStr2(line: str, sep: str|None) -> str2:
+    a, b = splitStr(line, sep)
+    return (a, b)
+
 def toStrInt(line: str, strLen: int) -> strInt:
     line = line.strip() 
     return (line[:strLen], int(line[strLen:]))
@@ -137,6 +141,21 @@ def cmp(a: int, b: int) -> int:
         return 1 
     else:
         return 0
+    
+def mergeRanges(ranges: list[int2]) -> list[int2]:
+    ranges.sort()
+    result: list[int2] = []
+    currStart, currEnd = ranges[0]
+    for nextStart, nextEnd in ranges[1:]:
+        if currStart <= nextStart and nextEnd <= currEnd: continue # subset 
+
+        if nextStart <= currEnd: # overlap
+            currEnd = nextEnd 
+        else:
+            result.append((currStart, currEnd))
+            currStart, currEnd = nextStart, nextEnd
+    result.append((currStart, currEnd))
+    return result
 
 #####################################################################################
 

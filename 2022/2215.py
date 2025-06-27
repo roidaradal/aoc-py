@@ -96,21 +96,6 @@ def computeNoBeacon(noBeacon: dict[int,list[int2]], cfg: Config):
             if nx1 >= nx2: continue # skip invalid range 
             noBeacon[ny].append((nx1, nx2))
 
-def mergeRanges(ranges: list[int2]) -> list[int2]:
-    ranges.sort()
-    result: list[int2] = []
-    currStart, currEnd = ranges[0]
-    for nextStart, nextEnd in ranges[1:]:
-        if currStart <= nextStart and nextEnd <= currEnd: continue # subset 
-
-        if nextStart <= currEnd: # overlap
-            currEnd = nextEnd 
-        else:
-            result.append((currStart, currEnd))
-            currStart, currEnd = nextStart, nextEnd
-    result.append((currStart, currEnd))
-    return result
-
 if __name__ == '__main__':
     do(solve, 22, 15)
 
