@@ -30,22 +30,6 @@ def visitNext(curr: coords, step: str, sp: dict[coords,int]) -> coords:
         sp[nxt] = sp[curr] + 1 
     return nxt
 
-def findCloser(pattern: str, start: int) -> int:
-    # Start = index of ( so start at next char to avoid incrementing the opener
-    i, limit = start+1, len(pattern)
-    depth = 0
-    while i < limit:
-        char = pattern[i]
-        if char == '(':
-            depth += 1
-        if char == ')':
-            if depth == 0:
-                break
-            else:
-                depth -= 1
-        i += 1
-    return i
-
 def resolvePattern(pattern: str, starts: list[coords], sp: dict[coords,int]) -> list[coords]:
     i, limit = 0, len(pattern)
     points = starts[:]
