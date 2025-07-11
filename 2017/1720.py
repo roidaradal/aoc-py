@@ -77,9 +77,6 @@ def part2() -> int:
              
     return len(active)
 
-def manhattan3(curr: int3):
-    return sum(abs(i) for i in curr)
-
 if __name__ == '__main__':
     do(solve, 17, 20)
 

@@ -2,7 +2,7 @@ from collections.abc import Callable, Iterator
 from collections import defaultdict
 from typing import Any
 from dotenv import load_dotenv
-import time, hashlib, os, sys
+import time, hashlib, os, sys, math
 
 load_dotenv()
 
@@ -158,15 +158,15 @@ def mergeRanges(ranges: list[int2]) -> list[int2]:
     result.append((currStart, currEnd))
     return result
 
-def findCloser(pattern: str, start: int) -> int:
+def findCloser(pattern: str, start: int, opener: str='(', closer: str= ')') -> int:
     # Start = index of ( so start at next char to avoid incrementing the opener
     i, limit = start+1, len(pattern)
     depth = 0
     while i < limit:
         char = pattern[i]
-        if char == '(':
+        if char == opener:
             depth += 1
-        if char == ')':
+        if char == closer:
             if depth == 0:
                 break
             else:
@@ -216,6 +216,9 @@ def getDelta(c1: coords, c2: coords) -> delta:
 def manhattan(c1: coords, c2: coords=(0,0)) -> int:
     (y1,x1),(y2,x2) = c1, c2
     return abs(y2-y1) + abs(x2-x1)
+
+def manhattan3(t1: int3, t2: int3=(0,0,0)) -> int:
+    return sum(abs(t1[i]-t2[i]) for i in range(3))
 
 def insideBounds(c: coords, maxBounds: dims2, minBounds: dims2 = (0,0)) -> bool:
     row, col = c 
