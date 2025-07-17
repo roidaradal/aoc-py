@@ -21,16 +21,20 @@ IntGrid = list[list[int]]
 Solution = tuple[str,str]
 
 def toDims2(line: str, sep: str|None) -> dims2:
-    a,b = [int(x.strip()) for x in line.split(sep)]
+    a,b = toIntList(line, sep)
     return (a,b)
 
 def toDims3(line: str, sep: str|None) -> dims3:
-    a,b,c = [int(x.strip()) for x in line.split(sep)]
+    a,b,c = toIntList(line, sep)
     return (a,b,c)
 
 def toInt2(line: str, sep: str|None) -> int2:
-    a,b = [int(x.strip()) for x in line.split(sep)]
+    a,b = toIntList(line, sep)
     return (a,b)
+
+def toInt3(line: str, sep: str|None) -> int3:
+    a,b,c = toIntList(line, sep)
+    return (a,b,c)
 
 def toStr2(line: str, sep: str|None) -> str2:
     a, b = splitStr(line, sep)
