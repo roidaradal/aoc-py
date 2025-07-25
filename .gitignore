@@ -1,6 +1,3 @@
 __pycache__/
-test/
-data/
-solutions/
 *.txt
 .env
