@@ -20,6 +20,8 @@ vector = tuple[coords,delta]
 IntGrid = list[list[int]]
 Solution = tuple[str,str]
 
+INF = sys.maxsize
+
 def toDims2(line: str, sep: str|None) -> dims2:
     a,b = toIntList(line, sep)
     return (a,b)
