@@ -80,6 +80,6 @@ Part1:
 - Repeat for 64 steps and output the final number of current points
 
 Part2:
-- Burnout, used a Reddit solution to complete Aoc 2023
+- Burnout, used a Reddit solution to complete AOC 2023
 - Reference: https://github.com/mgtezak/Advent_of_Code/blob/master/2023/Day_21.py
 '''
