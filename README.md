@@ -1,3 +1,3 @@
 # Advent of Code - Python
 
-Python solutions to Advent of Code 2015-2024
+Python solutions to Advent of Code 2015-2025
