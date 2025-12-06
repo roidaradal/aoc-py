@@ -18,6 +18,7 @@ str2   = tuple[str,str]
 str3   = tuple[str,str,str]
 vector = tuple[coords,delta]
 IntGrid = list[list[int]]
+StrGrid = list[list[str]]
 Solution = tuple[str,str]
 
 INF = sys.maxsize
