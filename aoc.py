@@ -2,7 +2,7 @@ from collections.abc import Callable, Iterator
 from collections import defaultdict
 from typing import Any
 from dotenv import load_dotenv
-import time, hashlib, os, sys
+import time, hashlib, os, sys, math
 
 load_dotenv()
 
@@ -226,6 +226,9 @@ def manhattan(c1: coords, c2: coords=(0,0)) -> int:
 
 def manhattan3(t1: int3, t2: int3=(0,0,0)) -> int:
     return sum(abs(t1[i]-t2[i]) for i in range(3))
+
+def euclidean3(t1: int3, t2: int3) -> float:
+    return math.sqrt(sum((t2[i]-t1[i])**2 for i in range(3)))
 
 def insideBounds(c: coords, maxBounds: dims2, minBounds: dims2 = (0,0)) -> bool:
     row, col = c 
