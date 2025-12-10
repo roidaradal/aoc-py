@@ -21,10 +21,7 @@ def solve() -> Solution:
     ranges = mergeRanges(ranges)
 
     # Part 1
-    count1 = 0
-    for ingredient in ingredients:
-        if any(first <= ingredient <= last for first,last in ranges):
-            count1 += 1
+    count1 = sum(any(first <= i <= last for first,last in ranges) for i in ingredients)
 
     # Part 2
     count2 = sum(last-first+1 for first,last in ranges)
